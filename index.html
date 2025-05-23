@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LoopOS Icons Revision</title>
+
+    <!-- Self-hosted Font Awesome -->
+    <link href="assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+    <link href="assets/fontawesome/css/brands.css" rel="stylesheet" />
+    <link href="assets/fontawesome/css/solid.css" rel="stylesheet" />
+    <link href="assets/fontawesome/css/regular.css" rel="stylesheet" />
+    <link href="assets/fontawesome/css/light.css" rel="stylesheet" />
+    <link href="assets/fontawesome/css/thin.css" rel="stylesheet" />
+    <link href="assets/fontawesome/css/sharp-thin.css" rel="stylesheet" />
+    <link href="assets/fontawesome/css/duotone-thin.css" rel="stylesheet" />
+    <link
+      href="/assets/fontawesome/css/sharp-duotone-thin.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400..700,0..1,0..200"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+        vertical-align: top;
+      }
+      th {
+        background-color: #f4f4f4;
+        font-weight: 500;
+      }
+      .fa-icon,
+      .material-symbol-preview,
+      .google-symbol-preview {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+      }
+      .material-symbols-outlined {
+        font-family: "Material Symbols Outlined";
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;
+        display: inline-block;
+        line-height: 1;
+        text-transform: none;
+        letter-spacing: normal;
+        white-space: nowrap;
+        direction: ltr;
+      }
+      input[type="text"],
+      textarea {
+        width: 100%;
+        box-sizing: border-box;
+        font-family: inherit;
+        font-size: 14px;
+      }
+      textarea {
+        resize: vertical;
+        min-height: 60px;
+      }
+      .disabled-row {
+        opacity: 0.5;
+      }
+      #stats,
+      #disabledCount {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <img
+      src="/LoopOS_Logo_RGB_Dark.png"
+      alt="Logo"
+      style="display: block; height: 40px"
+    />
+    <h3>Icons Revision 2025 [WARNING: JSON file doesn't save current icons]</h3>
+    <p id="stats"></p>
+    <p id="disabledCount"></p>
+    <table id="iconTable">
+      <thead>
+        <tr>
+          <th colspan="10">
+            <button id="exportBtn">Save as JSON</button>
+            <input type="file" id="importJson" accept=".json" />
+          </th>
+        </tr>
+        <tr style="position: sticky; top: 0">
+          <th>#</th>
+          <th>Current Icon</th>
+          <th></th>
+          <th>New Icon</th>
+          <th>Google Icon</th>
+          <th>Category</th>
+          <th>Usage Context</th>
+          <th>Issues</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody id="iconTableBody"></tbody>
+    </table>
+
+    <script>
+      const tableBody = document.getElementById("iconTableBody");
+      const exportBtn = document.getElementById("exportBtn");
+      const importJson = document.getElementById("importJson");
+      const statsDisplay = document.getElementById("stats");
+      const disabledCountDisplay = document.getElementById("disabledCount");
+
+      function updateStats() {
+        const rows = tableBody.querySelectorAll("tr");
+        const total = rows.length;
+        const disabled = tableBody.querySelectorAll("tr.disabled-row").length;
+        statsDisplay.textContent = `Total Current: ${total} | Total New: ${
+          total - disabled
+        }`;
+        disabledCountDisplay.textContent = `Disabled Icons: ${disabled}`;
+      }
+
+      function buildRow(item, index) {
+        const row = document.createElement("tr");
+
+        // Current Icon with text below
+        const faDiv = document.createElement("div");
+        faDiv.className = `fa-icon ${item.currentIcon}`;
+        const faText = document.createElement("div");
+        faText.textContent = item.currentIcon;
+        faText.style.fontSize = "12px";
+        const currentWrapper = document.createElement("div");
+        currentWrapper.appendChild(faDiv);
+        currentWrapper.appendChild(faText);
+
+        // Disable checkbox
+        const disableCheckbox = document.createElement("input");
+        disableCheckbox.type = "checkbox";
+        disableCheckbox.checked = !!item.disabled;
+        if (item.disabled) row.classList.add("disabled-row");
+        disableCheckbox.addEventListener("change", () => {
+          row.classList.toggle("disabled-row", disableCheckbox.checked);
+          saveToLocalStorage();
+          updateStats();
+        });
+
+        // New Icon
+        const newIconInput = document.createElement("input");
+        newIconInput.type = "text";
+        newIconInput.value = item.newIcon;
+        const newIconPreview = document.createElement("span");
+        newIconPreview.className =
+          "material-symbols-outlined material-symbol-preview";
+        newIconPreview.textContent = item.newIcon;
+        newIconInput.addEventListener("input", () => {
+          newIconPreview.textContent = newIconInput.value.trim();
+          saveToLocalStorage();
+        });
+        const newIconWrapper = document.createElement("div");
+        newIconWrapper.appendChild(newIconPreview);
+        newIconWrapper.appendChild(newIconInput);
+
+        // Google Icon with fill
+        const googleIconInput = document.createElement("input");
+        googleIconInput.type = "text";
+        googleIconInput.value = item.googleIcon || "";
+        const googleIconPreview = document.createElement("span");
+        googleIconPreview.className =
+          "material-symbols-outlined google-symbol-preview";
+        googleIconPreview.style.fontVariationSettings = '"FILL" 1';
+        googleIconPreview.textContent = item.googleIcon || "";
+        googleIconInput.addEventListener("input", () => {
+          googleIconPreview.textContent = googleIconInput.value.trim();
+          saveToLocalStorage();
+        });
+        const googleWrapper = document.createElement("div");
+        googleWrapper.appendChild(googleIconPreview);
+        googleWrapper.appendChild(googleIconInput);
+
+        // Textareas
+        const keys = ["category", "context", "issues", "action"];
+        const inputs = keys.map((key) => {
+          const ta = document.createElement("textarea");
+          ta.value = item[key];
+          ta.addEventListener("input", saveToLocalStorage);
+          return ta;
+        });
+
+        // Assemble row
+        row.innerHTML = `<td>${
+          index + 1
+        }</td><td></td><td></td><td></td><td></td>`;
+        row.children[1].appendChild(currentWrapper);
+        row.children[2].appendChild(disableCheckbox);
+        row.children[3].appendChild(newIconWrapper);
+        row.children[4].appendChild(googleWrapper);
+        inputs.forEach((el, i) =>
+          row.appendChild(document.createElement("td")).appendChild(el)
+        );
+        tableBody.appendChild(row);
+      }
+
+      function saveToLocalStorage() {
+        const data = Array.from(tableBody.querySelectorAll("tr")).map(
+          (row) => ({
+            currentIcon: row.children[1]
+              .querySelector("div:first-child")
+              .className.replace("fa-icon ", "")
+              .trim(),
+            disabled: row.classList.contains("disabled-row"),
+            newIcon: row.children[3].querySelector("input").value.trim(),
+            googleIcon: row.children[4].querySelector("input").value.trim(),
+            category: row.children[5].querySelector("textarea").value.trim(),
+            context: row.children[6].querySelector("textarea").value.trim(),
+            issues: row.children[7].querySelector("textarea").value.trim(),
+            action: row.children[8].querySelector("textarea").value.trim(),
+          })
+        );
+        localStorage.setItem("iconAuditData", JSON.stringify(data));
+      }
+
+      exportBtn.addEventListener("click", () => {
+        const blob = new Blob([localStorage.getItem("iconAuditData")], {
+          type: "application/json",
+        });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "icon-audit.json";
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+
+      importJson.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          const d = JSON.parse(ev.target.result);
+          localStorage.setItem("iconAuditData", JSON.stringify(d));
+          populateTable(d);
+        };
+        reader.readAsText(file);
+      });
+
+      function populateTable(data) {
+        tableBody.innerHTML = "";
+        data.forEach((it, i) => buildRow(it, i));
+        updateStats();
+      }
+
+      async function loadInitialData() {
+        const saved = localStorage.getItem("iconAuditData");
+        if (saved) {
+          populateTable(JSON.parse(saved));
+        } else {
+          const r = await fetch("assets/LoopOS_icons.csv");
+          const t = await r.text();
+          const lines = t.split(/\r?\n/).filter(Boolean);
+          const dat = lines.map((ic) => ({
+            currentIcon: ic.trim(),
+            disabled: false,
+            newIcon: "",
+            googleIcon: "",
+            category: "",
+            context: "",
+            issues: "",
+            action: "",
+          }));
+          populateTable(dat);
+        }
+      }
+      loadInitialData();
+    </script>
+  </body>
+</html>
