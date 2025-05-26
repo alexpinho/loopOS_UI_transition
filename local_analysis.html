@@ -93,7 +93,7 @@
       alt="Logo"
       style="display: block; height: 40px"
     />
-    <h3>Icons Revision 2025 [WARNING: JSON file doesn't save current icons]</h3>
+    <h3>Icons Revision 2025</h3>
     <p id="stats"></p>
     <p id="disabledCount"></p>
     <table id="iconTable">
@@ -130,7 +130,7 @@
         const rows = tableBody.querySelectorAll("tr");
         const total = rows.length;
         const disabled = tableBody.querySelectorAll("tr.disabled-row").length;
-        statsDisplay.textContent = `Total Current: ${total} | Total New: ${
+        statsDisplay.textContent = `Total Icons: ${total} | Active: ${
           total - disabled
         }`;
         disabledCountDisplay.textContent = `Disabled Icons: ${disabled}`;
@@ -138,8 +138,7 @@
 
       function buildRow(item, index) {
         const row = document.createElement("tr");
-
-        // Current Icon with text below
+        // Current Icon
         const faDiv = document.createElement("div");
         faDiv.className = `fa-icon ${item.currentIcon}`;
         const faText = document.createElement("div");
@@ -156,7 +155,6 @@
         if (item.disabled) row.classList.add("disabled-row");
         disableCheckbox.addEventListener("change", () => {
           row.classList.toggle("disabled-row", disableCheckbox.checked);
-          saveToLocalStorage();
           updateStats();
         });
 
@@ -170,35 +168,32 @@
         newIconPreview.textContent = item.newIcon;
         newIconInput.addEventListener("input", () => {
           newIconPreview.textContent = newIconInput.value.trim();
-          saveToLocalStorage();
         });
         const newIconWrapper = document.createElement("div");
         newIconWrapper.appendChild(newIconPreview);
         newIconWrapper.appendChild(newIconInput);
 
-        // Google Icon with fill
-        const newIconFilledInput = document.createElement("input");
-        newIconFilledInput.type = "text";
-        newIconFilledInput.value = item.newIconFilled || "";
-        const newIconFilledPreview = document.createElement("span");
-        newIconFilledPreview.className =
+        // Google Icon
+        const googleIconInput = document.createElement("input");
+        googleIconInput.type = "text";
+        googleIconInput.value = item.newIconFilled || "";
+        const googleIconPreview = document.createElement("span");
+        googleIconPreview.className =
           "material-symbols-outlined google-symbol-preview";
-        newIconFilledPreview.style.fontVariationSettings = '"FILL" 1';
-        newIconFilledPreview.textContent = item.newIconFilled || "";
-        newIconFilledInput.addEventListener("input", () => {
-          newIconFilledPreview.textContent = newIconFilledInput.value.trim();
-          saveToLocalStorage();
+        googleIconPreview.style.fontVariationSettings = '"FILL" 1';
+        googleIconPreview.textContent = item.newIconFilled || "";
+        googleIconInput.addEventListener("input", () => {
+          googleIconPreview.textContent = googleIconInput.value.trim();
         });
         const googleWrapper = document.createElement("div");
-        googleWrapper.appendChild(newIconFilledPreview);
-        googleWrapper.appendChild(newIconFilledInput);
+        googleWrapper.appendChild(googleIconPreview);
+        googleWrapper.appendChild(googleIconInput);
 
         // Textareas
         const keys = ["category", "context", "issues", "action"];
         const inputs = keys.map((key) => {
           const ta = document.createElement("textarea");
-          ta.value = item[key];
-          ta.addEventListener("input", saveToLocalStorage);
+          ta.value = item[key] || "";
           return ta;
         });
 
@@ -210,33 +205,31 @@
         row.children[2].appendChild(disableCheckbox);
         row.children[3].appendChild(newIconWrapper);
         row.children[4].appendChild(googleWrapper);
-        inputs.forEach((el, i) =>
+        inputs.forEach((el) =>
           row.appendChild(document.createElement("td")).appendChild(el)
         );
         tableBody.appendChild(row);
       }
 
-      function saveToLocalStorage() {
-        const data = Array.from(tableBody.querySelectorAll("tr")).map(
-          (row) => ({
-            currentIcon: row.children[1]
-              .querySelector("div:first-child")
-              .className.replace("fa-icon ", "")
-              .trim(),
-            disabled: row.classList.contains("disabled-row"),
-            newIcon: row.children[3].querySelector("input").value.trim(),
-            newIconFilled: row.children[4].querySelector("input").value.trim(),
-            category: row.children[5].querySelector("textarea").value.trim(),
-            context: row.children[6].querySelector("textarea").value.trim(),
-            issues: row.children[7].querySelector("textarea").value.trim(),
-            action: row.children[8].querySelector("textarea").value.trim(),
-          })
-        );
-        localStorage.setItem("iconAuditData", JSON.stringify(data));
+      function getTableData() {
+        return Array.from(tableBody.querySelectorAll("tr")).map((row) => ({
+          currentIcon: row.children[1]
+            .querySelector(".fa-icon")
+            .className.replace("fa-icon ", "")
+            .trim(),
+          disabled: row.classList.contains("disabled-row"),
+          newIcon: row.children[3].querySelector("input").value.trim(),
+          newIconFilled: row.children[4].querySelector("input").value.trim(),
+          category: row.children[5].querySelector("textarea").value.trim(),
+          context: row.children[6].querySelector("textarea").value.trim(),
+          issues: row.children[7].querySelector("textarea").value.trim(),
+          action: row.children[8].querySelector("textarea").value.trim(),
+        }));
       }
 
       exportBtn.addEventListener("click", () => {
-        const blob = new Blob([localStorage.getItem("iconAuditData")], {
+        const data = getTableData();
+        const blob = new Blob([JSON.stringify(data, null, 2)], {
           type: "application/json",
         });
         const url = URL.createObjectURL(blob);
@@ -253,7 +246,6 @@
         const reader = new FileReader();
         reader.onload = (ev) => {
           const d = JSON.parse(ev.target.result);
-          localStorage.setItem("iconAuditData", JSON.stringify(d));
           populateTable(d);
         };
         reader.readAsText(file);
@@ -266,11 +258,9 @@
       }
 
       async function loadInitialData() {
-        const saved = localStorage.getItem("iconAuditData");
-        if (saved) {
-          populateTable(JSON.parse(saved));
-        } else {
+        try {
           const r = await fetch("/assets/LoopOS_icons.csv");
+          if (!r.ok) throw new Error(`CSV load failed: ${r.status}`);
           const t = await r.text();
           const lines = t.split(/\r?\n/).filter(Boolean);
           const dat = lines.map((ic) => ({
@@ -284,8 +274,11 @@
             action: "",
           }));
           populateTable(dat);
+        } catch (err) {
+          console.error("Error loading CSV:", err);
         }
       }
+
       loadInitialData();
     </script>
   </body>
