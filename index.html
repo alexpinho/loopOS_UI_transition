@@ -110,15 +110,15 @@
         font-size: 12px;
         padding: 0.25em 0.6em;
         border-radius: 6px;
-        text-transform: uppercase;
-        font-weight: 600;
+        font-family: var(--font-body);
+        font-weight: 500;
         background: #E9F4FF;
         color: #005FF2;
+      }
 
-        &.success{
-          background: #E5FCE7;
-          color: #107D32;
-        }
+      .badge.success {
+        background: #E5FCE7;
+        color: #107D32;
       }
 
       table {
@@ -138,6 +138,16 @@
         overflow-wrap: anywhere; /* wrap long tokens/links */
       }
 
+      /* Stronger visual separation between table rows */
+      tbody tr + tr td {
+        border-top: 2px solid #dfe3ea; /* thicker divider between rows */
+      }
+
+
+      tbody tr:hover td {
+        background: #F6F6F6; /* subtle hover to aid scanability */
+      }
+
       .cell-entry {
         padding-top: 8px;
         margin-top: 8px;
@@ -152,7 +162,7 @@
 
       th {
         background: #f9f9f9;
-        font-weight: 600;
+        font-weight: 500;
       }
 
       .color-swatch {
@@ -187,15 +197,15 @@
     <h1>LoopOS UI Foundations Transition</h1>
     <div class="section-description">
       <p>This page serves as a visual reference for transitioning our design tokens and styles from UI 1.0 to UI 2.0. The goal is to help you understand exactly how each token is migrating so that we can align design and code seamlessly and reduce conflicts during the rollout of the new UI.
-      </br>
-    </br>
-    👉 For more details, you can access the <a href="https://www.figma.com/design/eon8NkZzqxEAgTllaZPRkz/%F0%9F%A7%A9-LoopOS-UI-2.0?node-id=1-14" target="_blank">Figma UI 2.0 Foundations file</a>. 
-  </br>
-</br>
+      <br/>
+    <br/>
+    👉 For more details, you can access the <a target="_blank" href="https://www.figma.com/design/eon8NkZzqxEAgTllaZPRkz/%F0%9F%A7%A9-LoopOS-UI-2.0?node-id=1-14" target="_blank">Figma UI 2.0 Foundations file</a>. 
+  <br/>
+<br/>
     If you have any questions, feel free to reach out to the design team [alexandre.pinho@getloopos.com]</p>
     </div>
 
-    <h2 id="icons">Icons <a class="section-link" href="#icons" aria-label="Link to Icons"><span class="material-symbols-outlined">open_in_new</span></a><span class="badge">In Progress</span></h2>
+    <h2 id="icons">Icons <a class="section-link" target="_blank" href="https://www.figma.com/design/eon8NkZzqxEAgTllaZPRkz/%F0%9F%A7%A9-LoopOS-UI-2.0?node-id=13-41&m=dev" aria-label="Link to Icons"><span class="material-symbols-outlined">open_in_new</span></a><span class="badge">In Progress</span></h2>
     <table>
       <thead>
         <tr><th>UI 1.0 (Font Awesome)</th><th>UI 2.0 (Material Symbols)</th><th>Usage</th><th>Notes</th></tr>
@@ -210,48 +220,361 @@
       </tbody>
     </table>
 
-    <h2 id="typography">Typography <a class="section-link" href="#typography" aria-label="Link to Typography"><span class="material-symbols-outlined">open_in_new</span></a><span class="badge success">Complete</span></h2>
+    <h2 id="typography">Typography <a target="_blank" class="section-link" href="https://www.figma.com/design/eon8NkZzqxEAgTllaZPRkz/%F0%9F%A7%A9-LoopOS-UI-2.0?node-id=6-90&m=dev" aria-label="Link to Typography"><span class="material-symbols-outlined">open_in_new</span></a><span class="badge success">Complete</span></h2>
     <table>
       <thead>
         <tr><th>UI 1.0 (Current)</th><th>UI 2.0 (New)</th><th>Usage</th><th>Notes</th></tr>
       </thead>
       <tbody>
         <tr>
+          <!-- TYPE UI 1.0 -->
           <td>
             <div class="cell-entry">
-              <span class="token-meta">Token: <code>typography/body</code></span>
-              CSS Variable: <code>?</code>
+              <span class="token-meta"><code>primary/8-tiny/Normal</code></span>
+              CSS Variable: <code></code>
             </div>
             <div class="cell-entry">
-              <span class="token-meta">Token: <code>typography/heading</code></span>
-              CSS Variable: <code>?</code>
+              <span class="token-meta"><code>primary/8-tiny/Medium</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/8-tiny/Bold</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>secondary/8-tiny/Normal</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>secondary/8-tiny/Medium</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>secondary/8-tiny/Bold</code></span>
+              CSS Variable: <code></code>
             </div>
           </td>
+          <!-- TYPE UI 2.0 -->
           <td>
-            <span class="token-meta">Token: <code>typography/body</code></span>
-            CSS Variable: <code>?</code>
+            <span class="token-meta">Token: <code>Copy/8</code></span>
+            CSS Variable: <code></code>
           </td>
-          <td></td>
+          <td>Used for notes.</td>
           <td></td>
         </tr>
-        
+        <!-- ROW -->
+        <tr>
+          <td>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/10-xxs/Normal</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/12-xs/Normal</code></span>
+              CSS Variable: <code></code>
+            </div>
+          </td>
+          <td>
+            <span class="token-meta">Token: <code>Copy/12/400</code></span>
+            CSS Variable: <code></code>
+          </td>
+          <td>Used for tertiary text in busy views.</td>
+          <td></td>
+        </tr>
+        <!-- END ROW -->
+         <!-- ROW -->
+        <tr>
+          <td>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/10-xxs/Medium</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/10-xxs/Bold</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/12-xs/Medium</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/12-xs/Bold</code></span>
+              CSS Variable: <code></code>
+            </div>
+          </td>
+          <td>
+            <span class="token-meta">Token: <code>Copy/12/500</code></span>
+            CSS Variable: <code></code>
+          </td>
+          <td>Used for tertiary text in busy views.</td>
+          <td></td>
+        </tr>
+        <!-- END ROW -->
+         <!-- ROW -->
+        <tr>
+          <td>
+            <div class="cell-entry">
+              <span class="token-meta"><code>secondary/10-xxs/Normal</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>secondary/12-xs/Normal</code></span>
+              CSS Variable: <code></code>
+            </div>
+          </td>
+          <td>
+            <span class="token-meta">Token: <code>Copy/12/Mono/500</code></span>
+            CSS Variable: <code></code>
+          </td>
+          <td>Used for inline code mentions.</td>
+          <td></td>
+        </tr>
+        <!-- END ROW -->
+         <!-- ROW -->
+        <tr>
+          <td>
+            <div class="cell-entry">
+              <span class="token-meta"><code>secondary/10-xxs/Medium</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>secondary/10-xxs/Bold</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>secondary/12-xs/Medium</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>secondary/12-xs/Bold</code></span>
+              CSS Variable: <code></code>
+            </div>
+          </td>
+          <td>
+            <span class="token-meta">Token: <code>Copy/12/Mono/600</code></span>
+            CSS Variable: <code></code>
+          </td>
+          <td>Used for inline code mentions.</td>
+          <td></td>
+        </tr>
+        <!-- END ROW -->
+         <!-- ROW -->
+        <tr>
+          <td>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/14-sm/Normal</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/14-sm/Medium</code></span>
+              CSS Variable: <code></code>
+            </div>
+          </td>
+          <td>
+            <span class="token-meta">Token: <code>Copy/14/400</code></span>
+            CSS Variable: <code></code>
+          </td>
+          <td>Most commonly used text style.</td>
+          <td></td>
+        </tr>
+        <!-- END ROW -->
+         <!-- ROW -->
+        <tr>
+          <td>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/14-sm/Bold</code></span>
+              CSS Variable: <code></code>
+            </div>
+          </td>
+          <td>
+            <span class="token-meta">Token: <code>Copy/14/500</code></span>
+            CSS Variable: <code></code>
+          </td>
+          <td>Most commonly used text style.</td>
+          <td></td>
+        </tr>
+        <!-- END ROW -->
+          <!-- ROW -->
+        <tr>
+          <td>
+            <div class="cell-entry">
+              <span class="token-meta"><code>secondary/14-sm/Normal</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>secondary/14-sm/Medium</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>secondary/14-sm/Bold</code></span>
+              CSS Variable: <code></code>
+            </div>
+          </td>
+          <td>
+            <span class="token-meta">Token: <code>Copy/14/Mono</code></span>
+            CSS Variable: <code></code>
+          </td>
+          <td>The largest mono style to pair with larger text.</td>
+          <td></td>
+        </tr>
+        <!-- END ROW -->
+          <!-- ROW -->
+        <tr>
+          <td>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/16-base/Normal</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/16-base/Medium</code></span>
+              CSS Variable: <code></code>
+            </div>
+          </td>
+          <td>
+            <span class="token-meta">Token: <code>Copy/16/400</code></span>
+            CSS Variable: <code></code>
+          </td>
+          <td>Used for text in larger views.</td>
+          <td></td>
+        </tr>
+        <!-- END ROW -->
+         <!-- ROW -->
+        <tr>
+          <td>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/16-base/Bold</code></span>
+              CSS Variable: <code></code>
+            </div>
+          </td>
+          <td>
+            <span class="token-meta">Token: <code>Copy/16/500</code></span>
+            CSS Variable: <code></code>
+          </td>
+          <td>Used for text in larger views.</td>
+          <td></td>
+        </tr>
+        <!-- END ROW -->
+         <!-- ROW -->
+        <tr>
+          <td>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/18-lg/Normal</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/18-lg/Medium</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/18-lg/Bold</code></span>
+              CSS Variable: <code></code>
+            </div>
+          </td>
+          <td>
+            <span class="token-meta">Token: <code>Heading/20</code></span>
+            CSS Variable: <code></code>
+          </td>
+          <td>Used for pages and sections headings.</td>
+          <td></td>
+        </tr>
+        <!-- END ROW -->
+         <!-- ROW -->
+        <tr>
+          <td>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/20-xl/Normal</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/20-xl/Medium</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/20-xl/Bold</code></span>
+              CSS Variable: <code></code>
+            </div>
+          </td>
+          <td>
+            <span class="token-meta">Token: <code>Heading/24</code></span>
+            CSS Variable: <code></code>
+          </td>
+          <td>Used for pages and sections headings.</td>
+          <td></td>
+        </tr>
+        <!-- END ROW -->
+         <!-- ROW -->
+        <tr>
+          <td>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/32-xxl/Normal</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/32-xxl/Medium</code></span>
+              CSS Variable: <code></code>
+            </div>
+            <div class="cell-entry">
+              <span class="token-meta"><code>primary/32-xxl/Bold</code></span>
+              CSS Variable: <code></code>
+            </div>
+          </td>
+          <td>
+            <span class="token-meta">Token: <code>Heading/30</code></span>
+            CSS Variable: <code></code>
+          </td>
+          <td>Used for pages and sections headings.</td>
+          <td></td>
+        </tr>
+        <!-- END ROW -->
+         <!-- ROW -->
+        <tr>
+          <td>
+            <div class="cell-entry">
+              <span class="token-meta"><code>?</code></span>
+              CSS Variable: <code></code>
+            </div>
+          </td>
+          <td>
+            <span class="token-meta">Token: <code>Button/14</code></span>
+            CSS Variable: <code></code>
+          </td>
+          <td>Used only on buttons.</td>
+          <td></td>
+        </tr>
+        <!-- END ROW -->
+          <!-- ROW -->
+        <tr>
+          <td>
+            <div class="cell-entry">
+              <span class="token-meta"><code>?</code></span>
+              CSS Variable: <code></code>
+            </div>
+          </td>
+          <td>
+            <span class="token-meta">Token: <code>Button/12</code></span>
+            CSS Variable: <code></code>
+          </td>
+          <td>Used only on buttons.</td>
+          <td></td>
+        </tr>
+        <!-- END ROW -->
       </tbody>
     </table>
 
-    <h2 id="colors">Colors <a class="section-link" href="#colors" aria-label="Link to Colors"><span class="material-symbols-outlined">open_in_new</span></a><span class="badge">Incomplete</span></h2>
+    <h2 id="colors">Colors <a class="section-link" target="_blank" href="https://www.figma.com/design/eon8NkZzqxEAgTllaZPRkz/%F0%9F%A7%A9-LoopOS-UI-2.0?node-id=13-68&m=dev" aria-label="Link to Colors"><span class="material-symbols-outlined">open_in_new</span></a><span class="badge">Incomplete</span></h2>
     <table>
       <thead>
         <tr><th>UI 1.0 (Current)</th><th>UI 2.0 (New)</th><th>Usage</th><th>Notes</th></tr>
       </thead>
       <tbody>
         <tr>
+          <!-- COLOR UI 1.0 -->
           <td>
             <span class="color-swatch" style="background:#8b7cf2"></span><span class="token-meta">var(--color-primary)</span>
-           
           </td>
+          <!-- COLOR UI 2.0 -->
           <td>
             <span class="color-swatch" style="background:#8b7cf2"></span><span class="token-meta">var(--color-primary)</span>
-           
           </td>
           <td></td>
           <td></td>
