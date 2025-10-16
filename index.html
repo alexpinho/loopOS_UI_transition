@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LoopOS UI transition</title>
 
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/LoopOS_Logo_RGB_Dark.png" />
+    <link rel="apple-touch-icon" href="/LoopOS_Logo_RGB_Dark.png" />
+
     <!-- Self-hosted Font Awesome -->
     <link href="/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
     <link href="/assets/fontawesome/css/brands.css" rel="stylesheet" />
@@ -20,74 +24,237 @@
     />
 
     <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400..700,0..1,0..200"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Material Symbols as glyphs (Outlined and Rounded) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
     <style>
+      :root {
+        --color-primary: #8b7cf2;
+        --color-primary-soft: #eae8fc;
+        --color-neutral: #e4e4e7;
+        --color-success: #22c55e;
+        --color-warning: #facc15;
+        --color-error: #ef4444;
+
+        --font-heading: 'Space Grotesk', sans-serif;
+        --font-body: 'IBM Plex Sans', sans-serif;
+      }
+
       body {
-        font-family: sans-serif;
-        padding: 20px;
+        font-family: var(--font-body);
+        margin: 2rem;
+        background-color: #fff;
+        color: #111;
+        line-height: 1.6;
       }
-      table {
-        border-collapse: collapse;
-        width: 100%;
-        margin-top: 20px;
+
+      /* Material Symbols configuration for glyph usage */
+      .material-symbols-outlined,
+      .material-symbols-rounded {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+        font-size: 20px;
+        line-height: 1;
+        vertical-align: middle;
       }
-      th,
-      td {
-        border: 1px solid #ccc;
-        padding: 8px;
-        text-align: left;
-        vertical-align: top;
+
+      h1 {
+        font-family: var(--font-heading);
+        font-size: 32px;
       }
-      th {
-        background-color: #f4f4f4;
-        font-weight: 500;
-      }
-      .fa-icon,
-      .material-symbol-preview,
-      .google-symbol-preview {
-        width: 32px;
-        height: 32px;
+
+      h2 {
+        font-family: var(--font-heading);
+        font-size: 24px;
+        margin-top: 3rem;
+        margin-bottom: 1rem;
         display: flex;
         align-items: center;
-        justify-content: center;
-        font-size: 24px;
+        gap: 0.5rem;
       }
-      .material-symbols-outlined {
-        font-family: "Material Symbols Outlined";
-        font-weight: normal;
-        font-style: normal;
-        font-size: 24px;
-        display: inline-block;
-        line-height: 1;
-        text-transform: none;
-        letter-spacing: normal;
-        white-space: nowrap;
-        direction: ltr;
+
+      .badge {
+        font-size: 12px;
+        padding: 0.25em 0.6em;
+        border-radius: 6px;
+        text-transform: uppercase;
+        font-weight: 600;
+        background: #e4e4e7;
+        color: #333;
       }
-      input[type="text"],
-      textarea {
+
+      table {
         width: 100%;
-        box-sizing: border-box;
-        font-family: inherit;
+        border-collapse: collapse;
+        margin-bottom: 3rem;
+      }
+
+      th, td {
+        border: 1px solid #e4e4e7;
+        padding: 0.75rem;
+        text-align: left;
+        vertical-align: middle;
         font-size: 14px;
       }
-      textarea {
-        resize: vertical;
-        min-height: 60px;
+
+      th {
+        background: #f9f9f9;
+        font-weight: 600;
       }
-      .disabled-row {
-        opacity: 0.5;
+
+      .color-swatch {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+        margin-right: 0.5rem;
+        vertical-align: middle;
       }
-      #stats,
-      #disabledCount {
-        margin: 0;
+
+      .token-meta {
+        display: block;
+        font-size: 12px;
+        color: #666;
+        margin-top: 4px;
+      }
+
+      .section-description {
+        font-size: 15px;
+        color: #444;
+        margin-bottom: 2rem;
+        max-width: 80ch;
       }
     </style>
   </head>
   <body>
-    
+    <img
+      src="/LoopOS_Logo_RGB_Dark.png"
+      alt="Logo"
+      style="display: block; height: 40px"
+    />
+    <h1>LoopOS UI Foundations Transition</h1>
+    <div class="section-description">
+      <p>This page serves as a visual reference for transitioning our design tokens and styles from UI 1.0 to UI 2.0. The goal is to help you understand exactly how each token is migrating so that we can align design and code seamlessly and reduce conflicts during the rollout of the new UI.
+      </br>
+    </br>
+    👉 For more details, you can access the <a href="https://www.figma.com/design/eon8NkZzqxEAgTllaZPRkz/%F0%9F%A7%A9-LoopOS-UI-2.0?node-id=1-14" target="_blank">Figma UI 2.0 Foundations file</a>. 
+  </br>
+</br>
+    If you have any questions, feel free to reach out to the design team [alexandre.pinho@getloopos.com]</p>
+    </div>
+
+    <h2>Icons <span class="badge">In Progress</span></h2>
+    <table>
+      <thead>
+        <tr><th>UI 1.0 (Font Awesome)</th><th>UI 2.0 (Material Symbols)</th><th>Usage</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><i class="fa-solid fa-trash"></i> delete</td>
+          <td><span class="material-symbols-rounded">delete</span> delete</td>
+          <td>Used in modals and inline actions</td>
+          <td>Replace in bulk using icon component wrapper</td>
+        </tr>
+        <tr>
+          <td><i class="fa-solid fa-eye"></i> visibility</td>
+          <td><span class="material-symbols-rounded">visibility</span> visibility</td>
+          <td>Used for show/hide toggles</td>
+          <td>Needs matching for semantic color</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Typography <span class="badge">Under Review</span></h2>
+    <table>
+      <thead>
+        <tr><th>UI 1.0 (Current)</th><th>UI 2.0 (New)</th><th>Usage</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            Tailwind: <code>text-base</code>
+            <span class="token-meta">Figma 1.0: <code>type/body/medium</code></span>
+          </td>
+          <td>
+            Tailwind: <code>text-base</code>
+            <span class="token-meta">Figma 2.0: <code>typography/body</code></span>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            Tailwind: <code>text-2xl font-bold</code>
+            <span class="token-meta">Figma 1.0: <code>type/heading/large</code></span>
+          </td>
+          <td>
+            Tailwind: <code>text-3xl font-semibold</code>
+            <span class="token-meta">Figma 2.0: <code>typography/heading-xl</code></span>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Colors <span class="badge">Incomplete</span></h2>
+    <table>
+      <thead>
+        <tr><th>UI 1.0 (Current)</th><th>UI 2.0 (New)</th><th>Usage</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <span class="color-swatch" style="background:#8b7cf2"></span>#8b7cf2<br/>
+            Tailwind: <code>bg-[#8b7cf2]</code>
+            <span class="token-meta">Figma 1.0: <code>color/primary/500</code></span>
+          </td>
+          <td>
+            <span class="color-swatch" style="background:#8b7cf2"></span>var(--color-primary)<br/>
+            Tailwind: <code>bg-primary</code>
+            <span class="token-meta">Figma 2.0: <code>colors/primary</code></span>
+          </td>
+          <td>Primary buttons, icon highlights</td>
+          <td>Confirm contrast on soft backgrounds</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="color-swatch" style="background:#eae8fc"></span>#eae8fc<br/>
+            Tailwind: <code>bg-[#eae8fc]</code>
+            <span class="token-meta">Figma 1.0: <code>color/primary/100</code></span>
+          </td>
+          <td>
+            <span class="color-swatch" style="background:#eae8fc"></span>var(--color-primary-soft)<br/>
+            Tailwind: <code>bg-primary/10</code>
+            <span class="token-meta">Figma 2.0: <code>colors/primary-soft</code></span>
+          </td>
+          <td>Backgrounds, tags, surface highlights</td>
+          <td>Consider softening further for dark mode</td>
+        </tr>
+      </tbody>
+    </table>
   </body>
 </html>
