@@ -112,14 +112,21 @@
         border-radius: 6px;
         font-family: var(--font-body);
         font-weight: 500;
+        background: #f6f6f6;
+        color: #102026;
+      }
+      .badge.info {
         background: #E9F4FF;
         color: #005FF2;
       }
-
+      .badge.counter {
+        border-radius:9999px
+      }
       .badge.success {
         background: #E5FCE7;
         color: #107D32;
       }
+
 
       table {
         width: 100%;
@@ -205,20 +212,105 @@
     If you have any questions, feel free to reach out to the design team [alexandre.pinho@getloopos.com]</p>
     </div>
 
-    <h2 id="icons">Icons <a class="section-link" target="_blank" href="https://www.figma.com/design/eon8NkZzqxEAgTllaZPRkz/%F0%9F%A7%A9-LoopOS-UI-2.0?node-id=13-41&m=dev" aria-label="Link to Icons"><span class="material-symbols-outlined">open_in_new</span></a><span class="badge">In Progress</span></h2>
+    <h2 id="icons">Icons <a class="section-link" target="_blank" href="https://www.figma.com/design/eon8NkZzqxEAgTllaZPRkz/%F0%9F%A7%A9-LoopOS-UI-2.0?node-id=13-41&m=dev" aria-label="Link to Icons"><span class="material-symbols-outlined">open_in_new</span></a><span class="badge info">In Progress</span><span class="badge counter" id="icons-rows-count"></span></h2>
     <table>
       <thead>
         <tr><th>UI 1.0 (Font Awesome)</th><th>UI 2.0 (Material Symbols)</th><th>Usage</th><th>Notes</th></tr>
       </thead>
       <tbody>
         <tr>
-          <td><i class="fa-solid fa-trash"></i> <span class="token-meta">Icon name: <code>fa-trash</code></span></td>
-          <td><span class="material-symbols-rounded">delete</span> <span class="token-meta">Icon name: <code>delete</code></span></td>
+          <td><i class="fa-regular fa-trash"></i> <span class="token-meta"><code>fa-regular fa-trash</code></span></td>
+          <td><span class="material-symbols-rounded">delete</span><span class="token-meta"><code>delete</code></span></td>
+          <td>Delete</td>
           <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-rectangle-code"></i> <span class="token-meta"><code>fa-regular fa-rectangle-code</code></span></td>
+          <td><span class="material-symbols-rounded">code_blocks</span><span class="token-meta"><code>code_blocks</code></span></td>
+          <td>Scripts</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-megaphone"></i> <span class="token-meta"><code>fa-regular fa-megaphone</code></span></td>
+          <td><span class="material-symbols-rounded">campaign</span><span class="token-meta"><code>campaign</code></span></td>
+          <td>Marketing</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-folder-tree"></i> <span class="token-meta"><code>fa-regular fa-folder-tree</code></span></td>
+          <td><span class="material-symbols-rounded">book_5</span><span class="token-meta"><code>book_5</code></span></td>
+          <td>Catalog</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-box"></i> <span class="token-meta"><code>fa-regular fa-box</code></span></td>
+          <td><span class="material-symbols-rounded">package_2</span><span class="token-meta"><code>package_2</code></span></td>
+          <td>Item</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-house"></i> <span class="token-meta"><code>fa-regular fa-house</code></span></td>
+          <td><span class="material-symbols-rounded">home</span><span class="token-meta"><code>home</code></span></td>
+          <td>Home/Dashboard</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-timeline-arrow"></i> <span class="token-meta"><code>fa-regular fa-timeline-arrow</code></span></td>
+          <td><span class="material-symbols-rounded">flowchart</span><span class="token-meta"><code>flowchart</code></span></td>
+          <td>Flows</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-box-open"></i> <span class="token-meta"><code>fa-regular fa-box-open</code></span></td>
+          <td><span class="material-symbols-rounded">box</span><span class="token-meta"><code>box</code></span></td>
+          <td>Product</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-seal"></i> <span class="token-meta"><code>fa-regular fa-seal</code></span></td>
+          <td><span class="material-symbols-rounded">verified</span><span class="token-meta"><code>verified</code></span></td>
+          <td>Brands</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-gear"></i> <span class="token-meta"><code>fa-regular fa-gear</code></span></td>
+          <td><span class="material-symbols-rounded">settings</span><span class="token-meta"><code>settings</code></span></td>
+          <td>Settings</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-bars-staggered"></i> <span class="token-meta"><code>fa-regular fa-bars-staggered</code></span></td>
+          <td><span class="material-symbols-rounded">article</span><span class="token-meta"><code>article</code></span></td>
+          <td>Protocols</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-messages-question"></i> <span class="token-meta"><code>fa-regular fa-messages-question</code></span></td>
+          <td><span class="material-symbols-rounded">support_agent</span><span class="token-meta"><code>support_agent</code></span></td>
+          <td>Support</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-boxes-stacked"></i> <span class="token-meta"><code>fa-regular fa-boxes-stacked</code></span></td>
+          <td><span class="material-symbols-rounded">shelves</span><span class="token-meta"><code>shelves</code></span></td>
+          <td>Stock</td>
           <td></td>
         </tr>
       </tbody>
     </table>
+
+    <script>
+      (function() {
+        try {
+          var iconsTable = document.querySelector('#icons + table tbody');
+          var countEl = document.getElementById('icons-rows-count');
+          if (iconsTable && countEl) {
+            var rows = iconsTable.querySelectorAll('tr');
+            countEl.textContent =  rows.length ;
+          }
+        } catch (e) {}
+      })();
+    </script>
 
     <h2 id="typography">Typography <a target="_blank" class="section-link" href="https://www.figma.com/design/eon8NkZzqxEAgTllaZPRkz/%F0%9F%A7%A9-LoopOS-UI-2.0?node-id=6-90&m=dev" aria-label="Link to Typography"><span class="material-symbols-outlined">open_in_new</span></a><span class="badge success">Complete</span></h2>
     <table>
@@ -561,7 +653,7 @@
       </tbody>
     </table>
 
-    <h2 id="colors">Colors <a class="section-link" target="_blank" href="https://www.figma.com/design/eon8NkZzqxEAgTllaZPRkz/%F0%9F%A7%A9-LoopOS-UI-2.0?node-id=13-68&m=dev" aria-label="Link to Colors"><span class="material-symbols-outlined">open_in_new</span></a><span class="badge">Incomplete</span></h2>
+    <h2 id="colors">Colors <a class="section-link" target="_blank" href="https://www.figma.com/design/eon8NkZzqxEAgTllaZPRkz/%F0%9F%A7%A9-LoopOS-UI-2.0?node-id=13-68&m=dev" aria-label="Link to Colors"><span class="material-symbols-outlined">open_in_new</span></a><span class="badge">To Do</span></h2>
     <table>
       <thead>
         <tr><th>UI 1.0 (Current)</th><th>UI 2.0 (New)</th><th>Usage</th><th>Notes</th></tr>
