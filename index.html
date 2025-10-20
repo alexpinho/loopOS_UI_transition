@@ -49,7 +49,7 @@
 
     <style>
       :root {
-        --color-primary: #8b7cf2;
+        --color-primary: #102026;
         --color-primary-soft: #eae8fc;
         --color-neutral: #e4e4e7;
         --color-success: #22c55e;
@@ -238,6 +238,45 @@
         margin-bottom: 2rem;
         max-width: 80ch;
       }
+
+      /* Tab navigation */
+      .tab-nav {
+        display: flex;
+        gap: 0;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid #e4e4e7;
+      }
+
+      .tab-button {
+        background: none;
+        border: none;
+        padding: 12px 20px;
+        font-family: var(--font-body);
+        font-size: 14px;
+        color: #666;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        transition: all 0.2s ease;
+      }
+
+      .tab-button:hover {
+        color: #333;
+        background: #f9f9f9;
+      }
+
+      .tab-button.active {
+        color: var(--color-primary);
+        border-bottom-color: var(--color-primary);
+        font-weight: 500;
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
     </style>
   </head>
   <body>
@@ -257,7 +296,16 @@
     If you have any questions, feel free to reach out to the design team [alexandre.pinho@getloopos.com]</p>
     </div>
 
-    <h2 id="icons">Icons <a class="section-link" target="_blank" href="https://www.figma.com/design/eon8NkZzqxEAgTllaZPRkz/%F0%9F%A7%A9-LoopOS-UI-2.0?node-id=13-41&m=dev" aria-label="Link to Icons"><span class="material-symbols-outlined">open_in_new</span></a><span class="badge info">In Progress</span><span class="badge counter" id="icons-rows-count"></span></h2>
+    <!-- Tab Navigation -->
+    <div class="tab-nav">
+      <button class="tab-button active" data-tab="icons">Icons</button>
+      <button class="tab-button" data-tab="typography">Typography</button>
+      <button class="tab-button" data-tab="colors">Colors</button>
+    </div>
+
+    <!-- Icons Tab Content -->
+    <div class="tab-content active" id="icons-tab">
+      <h2 id="icons">Icons <a class="section-link" target="_blank" href="https://www.figma.com/design/eon8NkZzqxEAgTllaZPRkz/%F0%9F%A7%A9-LoopOS-UI-2.0?node-id=13-41&m=dev" aria-label="Link to Icons"><span class="material-symbols-outlined">open_in_new</span></a><span class="badge info">In Progress</span><span class="badge counter" id="icons-rows-count"></span></h2>
     <table>
       <thead>
         <tr><th>UI 1.0 (Font Awesome)</th><th>UI 2.0 (Material Symbols)</th><th>Usage</th><th>Notes</th></tr>
@@ -297,6 +345,12 @@
           <td><i class="fa-regular fa-timeline-arrow"></i> <span class="token-meta"><code>fa-regular fa-timeline-arrow</code></span></td>
           <td><span class="material-symbols-rounded">flowchart</span><span class="token-meta"><code>flowchart</code></span></td>
           <td>Flows</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-grid"></i> <span class="token-meta"><code>fa-regular fa-grid</code></span></td>
+          <td><span class="material-symbols-rounded">category</span><span class="token-meta"><code>category</code></span></td>
+          <td>Category</td>
           <td></td>
         </tr>
         <tr>
@@ -414,7 +468,30 @@
           <td>Service: Tag</td>
           <td></td>
         </tr>
-      
+        <tr>
+          <td><i class="fa-regular fa-hand-holding-dollar"></i> <span class="token-meta"><code>fa-regular fa-hand-holding-dollar</code></span></td>
+          <td><span class="material-symbols-rounded">automation</span><span class="token-meta"><code>automation</code></span></td>
+          <td>Service: Auto Validation</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-door-closed"></i> <span class="token-meta"><code>fa-regular fa-door-closed</code></span></td>
+          <td><span class="material-symbols-rounded">door_front</span><span class="token-meta"><code>door_front</code></span></td>
+          <td>Service: End</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-envelope-open-dollar"></i> <span class="token-meta"><code>fa-regular fa-envelope-open-dollar</code></span></td>
+          <td><span class="material-symbols-rounded">payment_arrow_down</span><span class="token-meta"><code>payment_arrow_down</code></span></td>
+          <td>Service: Incoming payment</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-credit-card"></i> <span class="token-meta"><code>fa-regular fa-credit-card</code></span></td>
+          <td><span class="material-symbols-rounded" style="transform: rotate(180deg);">payment_arrow_down</span><span class="token-meta"><code>payment_arrow_down</code></span></td>
+          <td>Service: Outgoing payment</td>
+          <td></td>
+        </tr>
         <tr>
           <td><i class="fa-regular fa-magnifying-glass"></i> <span class="token-meta"><code>fa-regular fa-magnifying-glass</code></span></td>
           <td><span class="material-symbols-rounded">search</span><span class="token-meta"><code>search</code></span></td>
@@ -422,9 +499,135 @@
           <td></td>
         </tr>
         <tr>
+          <td><i class="fa-regular fa-square-check"></i> <span class="token-meta"><code>fa-regular fa-square-check</code></span></td>
+          <td><span class="material-symbols-rounded">toggle_on</span><span class="token-meta"><code>toggle_on</code></span></td>
+          <td>Input element Boolean</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-paintbrush-pencil"></i> <span class="token-meta"><code>fa-regular fa-paintbrush-pencil</code></span></td>
+          <td><span class="material-symbols-rounded">design_services</span><span class="token-meta"><code>design_services</code></span></td>
+          <td>Input element Custom</td>
+          <td></td>
+        </tr>
+        <tr>
           <td><i class="fa-regular fa-calendar"></i> <span class="token-meta"><code>fa-regular fa-calendar</code></span></td>
           <td><span class="material-symbols-rounded">calendar_today</span><span class="token-meta"><code>calendar_today</code></span></td>
-          <td>Calendar</td>
+          <td>Input element date / Date</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-calendar-range"></i> <span class="token-meta"><code>fa-regular fa-calendar-range</code></span></td>
+          <td><span class="material-symbols-rounded">date_range</span><span class="token-meta"><code>date_range</code></span></td>
+          <td>Input element date range / Date range </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-image"></i> <span class="token-meta"><code>fa-regular fa-image</code></span></td>
+          <td><span class="material-symbols-rounded">art_track</span><span class="token-meta"><code>art_track</code></span></td>
+          <td>Input element images </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-envelope"></i> <span class="token-meta"><code>fa-regular fa-envelope</code></span></td>
+          <td><span class="material-symbols-rounded">mail</span><span class="token-meta"><code>mail</code></span></td>
+          <td>Input element email</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
+          <td><span class="material-symbols-rounded">draft</span><span class="token-meta"><code>draft</code></span></td>
+          <td>Input element file</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-hashtag"></i> <span class="token-meta"><code>fa-regular fa-hashtag</code></span></td>
+          <td><span class="material-symbols-rounded">numbers</span><span class="token-meta"><code>numbers</code></span></td>
+          <td>Input element number</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-phone"></i> <span class="token-meta"><code>fa-regular fa-phone</code></span></td>
+          <td><span class="material-symbols-rounded">call</span><span class="token-meta"><code>call</code></span></td>
+          <td>Input element phone number</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-mailbox"></i> <span class="token-meta"><code>fa-regular fa-mailbox</code></span></td>
+          <td><span class="material-symbols-rounded">markunread_mailbox</span><span class="token-meta"><code>markunread_mailbox</code></span></td>
+          <td>Input element Postal Code</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-pen-line"></i> <span class="token-meta"><code>fa-regular fa-pen-line</code></span></td>
+          <td><span class="material-symbols-rounded">text_fields</span><span class="token-meta"><code>text_fields</code></span></td>
+          <td>Input element text </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-money-bill-transfer"></i> <span class="token-meta"><code>fa-regular fa-money-bill-transfer</code></span></td>
+          <td><span class="material-symbols-rounded">account_balance</span><span class="token-meta"><code>account_balance</code></span></td>
+          <td>Input element IBAN </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-list-check"></i> <span class="token-meta"><code>fa-regular fa-list-check</code></span></td>
+          <td><span class="material-symbols-rounded">checklist</span><span class="token-meta"><code>checklist</code></span></td>
+          <td>Input element Select Multiple Options </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-list-check"></i> <span class="token-meta"><code>fa-regular fa-list-check</code></span></td>
+          <td><span class="material-symbols-rounded">format_list_bulleted</span><span class="token-meta"><code>format_list_bulleted</code></span></td>
+          <td>Input element Select Single Option </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-euro-sign"></i> <span class="token-meta"><code>fa-regular fa-euro-sign</code></span></td>
+          <td><span class="material-symbols-rounded">payments</span><span class="token-meta"><code>payments</code></span></td>
+          <td>Input element Money </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-grid"></i> <span class="token-meta"><code>fa-regular fa-grid</code></span></td>
+          <td><span class="material-symbols-rounded">splitscreen</span><span class="token-meta"><code>splitscreen</code></span></td>
+          <td>Structure element divider </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-file-dashed-line"></i> <span class="token-meta"><code>fa-regular fa-file-dashed-line</code></span></td>
+          <td><span class="material-symbols-rounded">insert_page_break</span><span class="token-meta"><code>insert_page_break</code></span></td>
+          <td>Info element break </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-code"></i> <span class="token-meta"><code>fa-regular fa-code</code></span></td>
+          <td><span class="material-symbols-rounded">code</span><span class="token-meta"><code>code</code></span></td>
+          <td>Info element HTML </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-image"></i> <span class="token-meta"><code>fa-regular fa-image</code></span></td>
+          <td><span class="material-symbols-rounded">panorama</span><span class="token-meta"><code>panorama</code></span></td>
+          <td>Info element image / Image </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-heading"></i> <span class="token-meta"><code>fa-regular fa-heading</code></span></td>
+          <td><span class="material-symbols-rounded">title</span><span class="token-meta"><code>title</code></span></td>
+          <td>Info element title </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-text"></i> <span class="token-meta"><code>fa-regular fa-text</code></span></td>
+          <td><span class="material-symbols-rounded">insert_text</span><span class="token-meta"><code>insert_text</code></span></td>
+          <td>Info element text </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-link"></i> <span class="token-meta"><code>fa-regular fa-link</code></span></td>
+          <td><span class="material-symbols-rounded">link</span><span class="token-meta"><code>link</code></span></td>
+          <td>Info element url </td>
           <td></td>
         </tr>
         <tr>
@@ -458,6 +661,12 @@
           <td></td>
         </tr>
         <tr>
+          <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
+          <td><span class="material-symbols-rounded">thumb_down</span><span class="token-meta"><code>thumb_down</code></span></td>
+          <td>Rejected state</td>
+          <td></td>
+        </tr>
+        <tr>
           <td><i class="fa-regular fa-circle-info"></i> <span class="token-meta"><code>fa-regular fa-circle-info</code></span></td>
           <td><span class="material-symbols-rounded">info</span><span class="token-meta"><code>info</code></span></td>
           <td>Informative state</td>
@@ -467,6 +676,12 @@
           <td><i class="fa-regular fa-file-dashed-line"></i> <span class="token-meta"><code>fa-regular fa-file-dashed-line</code></span></td>
           <td><span class="material-symbols-rounded">contract_delete</span><span class="token-meta"><code>contract_delete</code></span></td>
           <td>Terminated state</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
+          <td><span class="material-symbols-rounded">history_toggle_off</span><span class="token-meta"><code>history_toggle_off</code></span></td>
+          <td>Expired state</td>
           <td></td>
         </tr>
         <tr>
@@ -529,6 +744,90 @@
           <td>Remove</td>
           <td></td>
         </tr>
+        <tr>
+          <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
+          <td><span class="material-symbols-rounded">notifications</span><span class="token-meta"><code>notifications</code></span></td>
+          <td>Notification</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
+          <td><span class="material-symbols-rounded">left_panel_close</span><span class="token-meta"><code>left_panel_close</code></span></td>
+          <td>Close sidebar</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
+          <td><span class="material-symbols-rounded">left_panel_open</span><span class="token-meta"><code>left_panel_open</code></span></td>
+          <td>Open sidebar</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-diagram-nested"></i> <span class="token-meta"><code>fa-regular fa-diagram-nested</code></span></td>
+          <td><span class="material-symbols-rounded">subdirectory_arrow_right</span><span class="token-meta"><code>subdirectory_arrow_right</code></span></td>
+          <td>Heritage</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-pencil"></i> <span class="token-meta"><code>fa-regular fa-pencil</code></span></td>
+          <td><span class="material-symbols-rounded">edit</span><span class="token-meta"><code>edit</code></span></td>
+          <td>Edit</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-grip-dots"></i> <span class="token-meta"><code>fa-regular fa-grip-dots</code></span></td>
+          <td><span class="material-symbols-rounded">drag_indicator</span><span class="token-meta"><code>drag_indicator</code></span></td>
+          <td>Drag</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
+          <td><span class="material-symbols-rounded">language</span><span class="token-meta"><code>language</code></span></td>
+          <td>Language overall app</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
+          <td><span class="material-symbols-rounded">translate</span><span class="token-meta"><code>translate</code></span></td>
+          <td>Translation feature</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-arrow-up-right-from-square"></i> <span class="token-meta"><code>fa-regular fa-arrow-up-right-from-square</code></span></td>
+          <td><span class="material-symbols-rounded">open_in_new</span><span class="token-meta"><code>open_in_new</code></span></td>
+          <td>Open in new</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-warehouse-full"></i> <span class="token-meta"><code>fa-regular fa-warehouse-full</code></span></td>
+          <td><span class="material-symbols-rounded">warehouse</span><span class="token-meta"><code>warehouse</code></span></td>
+          <td>Warehouse</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
+          <td><span class="material-symbols-rounded">contact_support</span><span class="token-meta"><code>contact_support</code></span></td>
+          <td>Help</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-ellipsis"></i> <span class="token-meta"><code>fa-regular fa-ellipsis</code></span></td>
+          <td><span class="material-symbols-rounded">more_horiz</span><span class="token-meta"><code>more_horiz</code></span></td>
+          <td>More</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-paper-plane"></i> <span class="token-meta"><code>fa-regular fa-paper-plane</code></span></td>
+          <td><span class="material-symbols-rounded">send</span><span class="token-meta"><code>send</code></span></td>
+          <td>Send</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-star"></i> <span class="token-meta"><code>fa-regular fa-star</code></span></td>
+          <td><span class="material-symbols-rounded">star</span><span class="token-meta"><code>star</code></span></td>
+          <td>Favourite</td>
+          <td></td>
+        </tr>
       </tbody>
     </table>
 
@@ -569,8 +868,11 @@
         } catch (e) {}
       });
     </script>
+    </div>
 
-    <h2 id="typography">Typography <a target="_blank" class="section-link" href="https://www.figma.com/design/eon8NkZzqxEAgTllaZPRkz/%F0%9F%A7%A9-LoopOS-UI-2.0?node-id=6-90&m=dev" aria-label="Link to Typography"><span class="material-symbols-outlined">open_in_new</span></a><span class="badge success">Complete</span></h2>
+    <!-- Typography Tab Content -->
+    <div class="tab-content" id="typography-tab">
+      <h2 id="typography">Typography <a target="_blank" class="section-link" href="https://www.figma.com/design/eon8NkZzqxEAgTllaZPRkz/%F0%9F%A7%A9-LoopOS-UI-2.0?node-id=6-90&m=dev" aria-label="Link to Typography"><span class="material-symbols-outlined">open_in_new</span></a><span class="badge success">Complete</span></h2>
     <table>
       <thead>
         <tr><th>UI 1.0 (Current)</th><th>UI 2.0 (New)</th><th>Usage</th><th>Notes</th></tr>
@@ -910,8 +1212,11 @@
         <!-- END ROW -->
       </tbody>
     </table>
-<section>
-  <h2 id="colors">Colors <a class="section-link" target="_blank" href="https://www.figma.com/design/eon8NkZzqxEAgTllaZPRkz/%F0%9F%A7%A9-LoopOS-UI-2.0?node-id=13-68&m=dev" aria-label="Link to Colors"><span class="material-symbols-outlined">open_in_new</span></a><span class="badge success">Complete</span></h2>
+    </div>
+
+    <!-- Colors Tab Content -->
+    <div class="tab-content" id="colors-tab">
+      <h2 id="colors">Colors <a class="section-link" target="_blank" href="https://www.figma.com/design/eon8NkZzqxEAgTllaZPRkz/%F0%9F%A7%A9-LoopOS-UI-2.0?node-id=13-68&m=dev" aria-label="Link to Colors"><span class="material-symbols-outlined">open_in_new</span></a><span class="badge success">Complete</span></h2>
   <p>In UI 2.0, colors are structured in two layers: <strong>primitives</strong> and <strong>tokens</strong>.</p>
   <ul>
     <li><strong>Primitives</strong> are the raw values. These are the new foundation and should be used only to build tokens, not applied directly in components.</li>
@@ -1536,5 +1841,28 @@
         </tr>
       </tbody>
     </table>
+    </div>
+
+    <!-- Tab switching JavaScript -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            const targetTab = this.getAttribute('data-tab');
+
+            // Remove active class from all buttons and contents
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // Add active class to clicked button and corresponding content
+            this.classList.add('active');
+            document.getElementById(targetTab + '-tab').classList.add('active');
+          });
+        });
+      });
+    </script>
   </body>
 </html>
