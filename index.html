@@ -179,6 +179,51 @@
         border-radius: 4px;
         margin-right: 0.5rem;
         vertical-align: middle;
+        position: relative; /* for tooltip positioning */
+        cursor: default;
+        overflow: visible; /* ensure tooltip is not clipped */
+        box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06);
+      }
+
+      .color-swatch:hover {
+        box-shadow: 0 2px 6px rgba(0,0,0,0.12), 0 4px 10px rgba(0,0,0,0.08);
+      }
+
+      /* Tooltip for color swatches */
+      .color-swatch::after {
+        content: attr(data-hex);
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: calc(100% + 6px);
+        background: #111;
+        color: #fff;
+        font-size: 12px;
+        padding: 2px 6px;
+        border-radius: 4px;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.15s ease;
+        z-index: 1000;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+      }
+
+      .color-swatch::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: calc(100% + 2px);
+        border: 4px solid transparent;
+        border-top-color: #111;
+        opacity: 0;
+        transition: opacity 0.15s ease;
+      }
+
+      .color-swatch[data-hex]:hover::after,
+      .color-swatch[data-hex]:hover::before {
+        opacity: 1;
       }
 
       .token-meta {
@@ -222,12 +267,6 @@
           <td><i class="fa-regular fa-trash"></i> <span class="token-meta"><code>fa-regular fa-trash</code></span></td>
           <td><span class="material-symbols-rounded">delete</span><span class="token-meta"><code>delete</code></span></td>
           <td>Delete</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td><i class="fa-regular fa-rectangle-code"></i> <span class="token-meta"><code>fa-regular fa-rectangle-code</code></span></td>
-          <td><span class="material-symbols-rounded">code_blocks</span><span class="token-meta"><code>code_blocks</code></span></td>
-          <td>Scripts</td>
           <td></td>
         </tr>
         <tr>
@@ -334,9 +373,21 @@
           <td></td>
         </tr>
         <tr>
+          <td><i class="fa-regular fa-cubes"></i> <span class="token-meta"><code>fa-regular fa-cubes</code></span></td>
+          <td><span class="material-symbols-rounded">handyman</span><span class="token-meta"><code>handyman</code></span></td>
+          <td>Services</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-rectangle-code"></i> <span class="token-meta"><code>fa-regular fa-rectangle-code</code></span></td>
+          <td><span class="material-symbols-rounded">code_blocks</span><span class="token-meta"><code>code_blocks</code></span></td>
+          <td>Service scripts / Scripts</td>
+          <td></td>
+        </tr>
+        <tr>
           <td><i class="fa-regular fa-split"></i> <span class="token-meta"><code>fa-regular fa-split</code></span></td>
           <td><span class="material-symbols-rounded">arrow_split</span><span class="token-meta"><code>arrow_split</code></span></td>
-          <td>Decision Block</td>
+          <td>Service Decision</td>
           <td></td>
         </tr>
         <tr>
@@ -358,29 +409,12 @@
           <td></td>
         </tr>
         <tr>
-          <td><i class="fa-regular fa-user-helmet-safety"></i> <span class="token-meta"><code>fa-regular fa-user-helmet-safety</code></span></td>
-          <td><span class="material-symbols-rounded">engineering</span><span class="token-meta"><code>engineering</code></span></td>
-          <td>Operator State</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td><i class="fa-regular fa-circle-user"></i> <span class="token-meta"><code>fa-regular fa-circle-user/code></span></td>
-          <td><span class="material-symbols-rounded">account_circle</span><span class="token-meta"><code>account_circle</code></span></td>
-          <td>Client State</td>
-          <td></td>
-        </tr>
-        <tr>
           <td><i class="fa-regular fa-tag"></i> <span class="token-meta"><code>fa-regular fa-tag</code></span></td>
           <td><span class="material-symbols-rounded">sell</span><span class="token-meta"><code>sell</code></span></td>
-          <td>Tag</td>
+          <td>Service: Tag</td>
           <td></td>
         </tr>
-        <tr>
-          <td><i class="fa-regular fa-cubes"></i> <span class="token-meta"><code>fa-regular fa-cubes</code></span></td>
-          <td><span class="material-symbols-rounded">handyman</span><span class="token-meta"><code>handyman</code></span></td>
-          <td>Services</td>
-          <td></td>
-        </tr>
+      
         <tr>
           <td><i class="fa-regular fa-magnifying-glass"></i> <span class="token-meta"><code>fa-regular fa-magnifying-glass</code></span></td>
           <td><span class="material-symbols-rounded">search</span><span class="token-meta"><code>search</code></span></td>
@@ -394,25 +428,146 @@
           <td></td>
         </tr>
         <tr>
+          <td><i class="fa-regular fa-user-helmet-safety"></i> <span class="token-meta"><code>fa-regular fa-user-helmet-safety</code></span></td>
+          <td><span class="material-symbols-rounded">engineering</span><span class="token-meta"><code>engineering</code></span></td>
+          <td>Operator State</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-circle-user"></i> <span class="token-meta"><code>fa-regular fa-circle-user/code></span></td>
+          <td><span class="material-symbols-rounded">account_circle</span><span class="token-meta"><code>account_circle</code></span></td>
+          <td>Client State</td>
+          <td></td>
+        </tr>
+        <tr>
           <td><i class="fa-regular fa-check-circle"></i> <span class="token-meta"><code>fa-regular fa-check-circle</code></span></td>
           <td><span class="material-symbols-rounded">check_circle</span><span class="token-meta"><code>check_circle</code></span></td>
           <td>Success state</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-circle-exclamation"></i> <span class="token-meta"><code>fa-regular fa-circle-exclamation</code></span></td>
+          <td><span class="material-symbols-rounded">error</span><span class="token-meta"><code>error</code></span></td>
+          <td>Warning state</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-circle-xmark"></i> <span class="token-meta"><code>fa-regular fa-circle-xmark</code></span></td>
+          <td><span class="material-symbols-rounded">cancel</span><span class="token-meta"><code>cancel</code></span></td>
+          <td>Error state</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-circle-info"></i> <span class="token-meta"><code>fa-regular fa-circle-info</code></span></td>
+          <td><span class="material-symbols-rounded">info</span><span class="token-meta"><code>info</code></span></td>
+          <td>Informative state</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-file-dashed-line"></i> <span class="token-meta"><code>fa-regular fa-file-dashed-line</code></span></td>
+          <td><span class="material-symbols-rounded">contract_delete</span><span class="token-meta"><code>contract_delete</code></span></td>
+          <td>Terminated state</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-file-ban"></i> <span class="token-meta"><code>fa-regular fa-ban</code></span></td>
+          <td><span class="material-symbols-rounded">block</span><span class="token-meta"><code>block</code></span></td>
+          <td>Issue/Cancelled state</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-file-invoice"></i> <span class="token-meta"><code>fa-regular fa-file-invoice</code></span></td>
+          <td><span class="material-symbols-rounded">receipt_long</span><span class="token-meta"><code>receipt_long</code></span></td>
+          <td>Invoice</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-chevron-up"></i> <span class="token-meta"><code>fa-regular fa-chevron-up</code></span></td>
+          <td><span class="material-symbols-rounded">keyboard_arrow_up</span><span class="token-meta"><code>keyboard_arrow_up</code></span></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-chevron-down"></i> <span class="token-meta"><code>fa-regular fa-chevron-down</code></span></td>
+          <td><span class="material-symbols-rounded">keyboard_arrow_down</span><span class="token-meta"><code>keyboard_arrow_down</code></span></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-chevron-left"></i> <span class="token-meta"><code>fa-regular fa-chevron-left</code></span></td>
+          <td><span class="material-symbols-rounded">chevron_left</span><span class="token-meta"><code>chevron_left</code></span></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-chevron-right"></i> <span class="token-meta"><code>fa-regular fa-chevron-right</code></span></td>
+          <td><span class="material-symbols-rounded">chevron_right</span><span class="token-meta"><code>chevron_right</code></span></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-person-carry-box"></i> <span class="token-meta"><code>fa-regular fa-person-carry-box</code></span></td>
+          <td><span class="material-symbols-rounded">hand_package</span><span class="token-meta"><code>hand_package</code></span></td>
+          <td>Deliveries</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-xmark"></i> <span class="token-meta"><code>fa-regular fa-xmark</code></span></td>
+          <td><span class="material-symbols-rounded">close</span><span class="token-meta"><code>close</code></span></td>
+          <td>Close</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-plus"></i> <span class="token-meta"><code>fa-regular fa-plus</code></span></td>
+          <td><span class="material-symbols-rounded">add</span><span class="token-meta"><code>add</code></span></td>
+          <td>Add</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-minus"></i> <span class="token-meta"><code>fa-regular fa-minus</code></span></td>
+          <td><span class="material-symbols-rounded">remove</span><span class="token-meta"><code>remove</code></span></td>
+          <td>Remove</td>
           <td></td>
         </tr>
       </tbody>
     </table>
 
     <script>
-      (function() {
+      window.addEventListener('DOMContentLoaded', function() {
         try {
           var iconsTable = document.querySelector('#icons + table tbody');
           var countEl = document.getElementById('icons-rows-count');
           if (iconsTable && countEl) {
             var rows = iconsTable.querySelectorAll('tr');
-            countEl.textContent =  rows.length ;
+            countEl.textContent = rows.length;
           }
         } catch (e) {}
-      })();
+
+        try {
+          function rgbToHex(rgb) {
+            var m = rgb.match(/rgba?\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)(?:\s*,\s*(\d*\.?\d+))?\)/i);
+            if (!m) return rgb;
+            var r = parseInt(m[1], 10).toString(16).padStart(2, '0');
+            var g = parseInt(m[2], 10).toString(16).padStart(2, '0');
+            var b = parseInt(m[3], 10).toString(16).padStart(2, '0');
+            if (m[4] && m[4] !== '1') {
+              var a = Math.round(parseFloat(m[4]) * 255).toString(16).padStart(2, '0');
+              return ('#' + r + g + b + a).toUpperCase();
+            }
+            return ('#' + r + g + b).toUpperCase();
+          }
+
+          var swatches = document.querySelectorAll('.color-swatch');
+          swatches.forEach(function(swatch) {
+            var computed = window.getComputedStyle(swatch).backgroundColor;
+            if (!computed) return;
+            var hex = /^#/.test(computed) ? computed.toUpperCase() : rgbToHex(computed);
+            swatch.setAttribute('data-hex', hex);
+            swatch.setAttribute('title', hex);
+            swatch.setAttribute('aria-label', hex);
+          });
+        } catch (e) {}
+      });
     </script>
 
     <h2 id="typography">Typography <a target="_blank" class="section-link" href="https://www.figma.com/design/eon8NkZzqxEAgTllaZPRkz/%F0%9F%A7%A9-LoopOS-UI-2.0?node-id=6-90&m=dev" aria-label="Link to Typography"><span class="material-symbols-outlined">open_in_new</span></a><span class="badge success">Complete</span></h2>
@@ -755,26 +910,630 @@
         <!-- END ROW -->
       </tbody>
     </table>
+<section>
+  <h2 id="colors">Colors <a class="section-link" target="_blank" href="https://www.figma.com/design/eon8NkZzqxEAgTllaZPRkz/%F0%9F%A7%A9-LoopOS-UI-2.0?node-id=13-68&m=dev" aria-label="Link to Colors"><span class="material-symbols-outlined">open_in_new</span></a><span class="badge success">Complete</span></h2>
+  <p>In UI 2.0, colors are structured in two layers: <strong>primitives</strong> and <strong>tokens</strong>.</p>
+  <ul>
+    <li><strong>Primitives</strong> are the raw values. These are the new foundation and should be used only to build tokens, not applied directly in components.</li>
+    <li><strong>Tokens</strong> map primitives into roles, for example <code>text.primary</code>, <code>bg.surface</code>, <code>border.default</code>. These tokens are defined in the Figma UI 2.0 file and must be created in code to ensure alignment between design and development.</li>
+  </ul>
 
-    <h2 id="colors">Colors <a class="section-link" target="_blank" href="https://www.figma.com/design/eon8NkZzqxEAgTllaZPRkz/%F0%9F%A7%A9-LoopOS-UI-2.0?node-id=13-68&m=dev" aria-label="Link to Colors"><span class="material-symbols-outlined">open_in_new</span></a><span class="badge">To Do</span></h2>
+  <h4>Usage during transition</h4>
+  <ul>
+    <li>For UI 2.0 components, it is mandatory to use <strong>tokens</strong>.</li>
+    <li>For legacy UI 1.0 components, you may still apply <strong>primitives</strong> until the component is migrated to UI 2.0.</li>
+    <li>Once a component is transitioned to UI 2.0, replace any primitive usage with the proper token.</li>
+  </ul>
+
+  <p>This ensures consistency across design and code, reduces conflicts during migration, and prepares the system for long term scalability.</p>
+</section>
+
+    
     <table>
       <thead>
         <tr><th>UI 1.0 (Current)</th><th>UI 2.0 (New)</th><th>Usage</th><th>Notes</th></tr>
       </thead>
       <tbody>
-        <tr>
-          <!-- COLOR UI 1.0 -->
+        <tr style="background-color:#F6F6F6">
           <td>
-            <span class="color-swatch" style="background:#8b7cf2"></span><span class="token-meta">var(--color-primary)</span>
+            Primitives
           </td>
-          <!-- COLOR UI 2.0 -->
           <td>
-            <span class="color-swatch" style="background:#8b7cf2"></span><span class="token-meta">var(--color-primary)</span>
           </td>
           <td></td>
           <td></td>
         </tr>
+        <tr>
+          <!-- COLOR UI 1.0 -->
+          <td>
+            <div class="cell-entry">
+            <span class="color-swatch" style="background:#B53C000D"></span><span class="token-meta">Apps/Core/5-Opacity</span>
+          </div>
+          <div class="cell-entry">
+            <span class="color-swatch" style="background:#FDFBFA"></span><span class="token-meta">Apps/Core/100</span>
+            </div>
+            <div class="cell-entry">
+              <span class="color-swatch" style="background:#FBF5F2"></span><span class="token-meta">Apps/Core/200</span>
+            </div>
+            <div class="cell-entry">
+              <span class="color-swatch" style="background:#F8ECE6"></span><span class="token-meta">Apps/Core/300</span>
+            </div>
+          </td>
+          <!-- COLOR UI 2.0 -->
+          <td>
+            <span class="color-swatch" style="background:#DA48000D"></span><span class="token-meta">color/apps/orange/700/alpha/05</span>
+          </td>
+          <td>Core app</td>
+          <td></td>
+        </tr>
+        <tr>
+          <!-- COLOR UI 1.0 -->
+          <td>
+            <div class="cell-entry">
+            <span class="color-swatch" style="background:#E9C5B3"></span><span class="token-meta">Apps/Core/400</span>
+            </div>
+            <div class="cell-entry">
+              <span class="color-swatch" style="background:#B53C00"></span><span class="token-meta">Apps/Core/800-Primary</span>
+              </div>
+              <div class="cell-entry">
+                <span class="color-swatch" style="background:#933100"></span><span class="token-meta">Apps/Core/900-Hover</span>
+                </div>
+          </td>
+          <!-- COLOR UI 2.0 -->
+          <td>
+            <span class="color-swatch" style="background:#DA4800"></span><span class="token-meta">color/apps/orange/700</span>
+          </td>
+          <td>Core app</td>
+          <td></td>
+        </tr>
+        <tr>
+          <!-- COLOR UI 1.0 -->
+          <td>
+            <div class="cell-entry">
+            <span class="color-swatch" style="background:#331D8B0D"></span><span class="token-meta">Apps/Handling/5-Opacity</span>
+          </div>
+          <div class="cell-entry">
+            <span class="color-swatch" style="background:#FAFAFC"></span><span class="token-meta">Apps/Handling/100</span>
+            </div>
+            <div class="cell-entry">
+              <span class="color-swatch" style="background:#EDEDF3"></span><span class="token-meta">Apps/Handling/200</span>
+            </div>
+            <div class="cell-entry">
+              <span class="color-swatch" style="background:#E8E6F2"></span><span class="token-meta">Apps/Handling/300</span>
+            </div>
+          </td>
+          <!-- COLOR UI 2.0 -->
+          <td>
+            <span class="color-swatch" style="background:#8044FF0D"></span><span class="token-meta">color/apps/purple/700/alpha/05</span>
+          </td>
+          <td>Handling app</td>
+          <td></td>
+        </tr>
+        <tr>
+          <!-- COLOR UI 1.0 -->
+          <td>
+            <div class="cell-entry">
+            <span class="color-swatch" style="background:#BAB3D8"></span><span class="token-meta">Apps/Handling/400</span>
+            </div>
+            <div class="cell-entry">
+              <span class="color-swatch" style="background:#331D8B"></span><span class="token-meta">Apps/Handling/800-Primary</span>
+              </div>
+              <div class="cell-entry">
+                <span class="color-swatch" style="background:#19007D"></span><span class="token-meta">Apps/Handling/900-Hover</span>
+                </div>
+          </td>
+          <!-- COLOR UI 2.0 -->
+          <td>
+            <span class="color-swatch" style="background:#8044FF"></span><span class="token-meta">color/apps/purple/700</span>
+          </td>
+          <td>Handling app</td>
+          <td></td>
+        </tr>
+        <tr>
+          <!-- COLOR UI 1.0 -->
+          <td>
+            <div class="cell-entry">
+            <span class="color-swatch" style="background:#0B6EF90D"></span><span class="token-meta">Apps/Hubs/5-Opacity</span>
+          </div>
+          <div class="cell-entry">
+            <span class="color-swatch" style="background:#FAFCFF"></span><span class="token-meta">Apps/Hubs/100</span>
+            </div>
+            <div class="cell-entry">
+              <span class="color-swatch" style="background:#F2F7FF"></span><span class="token-meta">Apps/Hubs/200</span>
+            </div>
+            <div class="cell-entry">
+              <span class="color-swatch" style="background:#E6F0FF"></span><span class="token-meta">Apps/Hubs/300</span>
+            </div>
+          </td>
+          <!-- COLOR UI 2.0 -->
+          <td>
+            <span class="color-swatch" style="background:#006DF50D"></span><span class="token-meta">color/apps/blue/700/alpha/05</span>
+          </td>
+          <td>Hubs app</td>
+          <td></td>
+        </tr>
+        <tr>
+          <!-- COLOR UI 1.0 -->
+          <td>
+            <div class="cell-entry">
+            <span class="color-swatch" style="background:#CCE1FF"></span><span class="token-meta">Apps/Hubs/400</span>
+            </div>
+            <div class="cell-entry">
+              <span class="color-swatch" style="background:#0B6EF9"></span><span class="token-meta">Apps/Hubs/800-Primary</span>
+              </div>
+              <div class="cell-entry">
+                <span class="color-swatch" style="background:#005EE3"></span><span class="token-meta">Apps/Hubs/900-Hover</span>
+                </div>
+          </td>
+          <!-- COLOR UI 2.0 -->
+          <td>
+            <span class="color-swatch" style="background:#006DF5"></span><span class="token-meta">color/apps/blue/700</span>
+          </td>
+          <td>Hubs app</td>
+          <td></td>
+        </tr>
+        <tr>
+          <!-- COLOR UI 1.0 -->
+          <td>
+            <div class="cell-entry">
+            <span class="color-swatch" style="background:#40A77F0D"></span><span class="token-meta">Apps/Impact/5-Opacity</span>
+          </div>
+          <div class="cell-entry">
+            <span class="color-swatch" style="background:#F7FCFA"></span><span class="token-meta">Apps/Impact/100</span>
+            </div>
+            <div class="cell-entry">
+              <span class="color-swatch" style="background:#EEF5F2"></span><span class="token-meta">Apps/Impact/200</span>
+            </div>
+            <div class="cell-entry">
+              <span class="color-swatch" style="background:#E6F0EC"></span><span class="token-meta">Apps/Impact/300</span>
+            </div>
+
+            <div class="cell-entry">
+              <span class="color-swatch" style="background:#1C7E430D"></span><span class="token-meta">Apps/Validation/5-Opacity</span>
+            </div>
+            <div class="cell-entry">
+              <span class="color-swatch" style="background:#FAFFFC"></span><span class="token-meta">Apps/Validation/100</span>
+              </div>
+              <div class="cell-entry">
+                <span class="color-swatch" style="background:#EEFFF5"></span><span class="token-meta">Apps/Validation/200</span>
+              </div>
+              <div class="cell-entry">
+                <span class="color-swatch" style="background:#E6FFF0"></span><span class="token-meta">Apps/Validation/300</span>
+              </div>
+          </td>
+          <!-- COLOR UI 2.0 -->
+          <td>
+            <span class="color-swatch" style="background:#0485850D"></span><span class="token-meta">color/apps/green/700/alpha/05</span>
+          </td>
+          <td>Validation/Impact app</td>
+          <td></td>
+        </tr>
+        <tr>
+          <!-- COLOR UI 1.0 -->
+          <td>
+            <div class="cell-entry">
+            <span class="color-swatch" style="background:#A6D0C0"></span><span class="token-meta">Apps/Impact/400</span>
+            </div>
+            <div class="cell-entry">
+              <span class="color-swatch" style="background:#40A77F"></span><span class="token-meta">Apps/Impact/800-Primary</span>
+              </div>
+              <div class="cell-entry">
+                <span class="color-swatch" style="background:#2D765A"></span><span class="token-meta">Apps/Impact/900-Hover</span>
+                </div>
+
+                <div class="cell-entry">
+                  <span class="color-swatch" style="background:#CCFFE0"></span><span class="token-meta">Apps/Validation/400</span>
+                  </div>
+                  <div class="cell-entry">
+                    <span class="color-swatch" style="background:#1C7E43"></span><span class="token-meta">Apps/Validation/800-Primary</span>
+                    </div>
+                    <div class="cell-entry">
+                      <span class="color-swatch" style="background:#006127"></span><span class="token-meta">Apps/Validation/900-Hover</span>
+                      </div>
+          </td>
+          <!-- COLOR UI 2.0 -->
+          <td>
+            <span class="color-swatch" style="background:#048585"></span><span class="token-meta">color/apps/green/700</span>
+          </td>
+          <td>Validation/Impact app</td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <!-- COLOR UI 1.0 -->
+          <td>
+            <div class="cell-entry">
+            <span class="color-swatch" style="background:#212529"></span><span class="token-meta">General/Global/Black</span>
+          </div>
         
+          </td>
+          <!-- COLOR UI 2.0 -->
+          <td>
+            <span class="color-swatch" style="background:#000000"></span><span class="token-meta">color/black</span>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+            <!-- COLOR UI 1.0 -->
+            <td>
+              <div class="cell-entry">
+              <span class="color-swatch" style="background:#ffffff"></span><span class="token-meta">General/Global/White</span>
+            </div>
+          
+            </td>
+            <!-- COLOR UI 2.0 -->
+            <td>
+              <span class="color-swatch" style="background:#ffffff"></span><span class="token-meta">color/white</span>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+          <!-- COLOR UI 1.0 -->
+          <td>
+            <div class="cell-entry">
+            <span class="color-swatch" style="background:#FFFFFF73"></span><span class="token-meta">General/Global/White-45-Opacity</span>
+          </div>
+          
+          </td>
+          <!-- COLOR UI 2.0 -->
+          <td>
+            <span class="color-swatch" style="background:#18181805"></span><span class="token-meta">color/gray/alpha/50</span>
+          </td>
+          <td></td>
+          <td></td>
+          </tr>
+
+        <tr>
+          <!-- COLOR UI 1.0 -->
+          <td>
+            <div class="cell-entry">
+            <span class="color-swatch" style="background:#F8F9FA"></span><span class="token-meta">General/Gray/100</span>
+          </div>
+        
+          </td>
+          <!-- COLOR UI 2.0 -->
+          <td>
+            <span class="color-swatch" style="background:#F6F6F6"></span><span class="token-meta">color/gray/50</span>
+          </td>
+          <td></td>
+          <td></td>
+      </tr>
+
+      <tr>
+        <!-- COLOR UI 1.0 -->
+        <td>
+          <div class="cell-entry">
+          <span class="color-swatch" style="background:#ECEFF2"></span><span class="token-meta">General/Gray/200</span>
+        </div>
+      
+        </td>
+        <!-- COLOR UI 2.0 -->
+        <td>
+          <span class="color-swatch" style="background:#E7E7E7"></span><span class="token-meta">color/gray/100</span>
+        </td>
+        <td></td>
+        <td></td>
+    </tr>
+
+    <tr>
+      <!-- COLOR UI 1.0 -->
+      <td>
+        <div class="cell-entry">
+        <span class="color-swatch" style="background:#DEE2E6"></span><span class="token-meta">General/Gray/300</span>
+      </div>
+    
+      </td>
+      <!-- COLOR UI 2.0 -->
+      <td>
+        <span class="color-swatch" style="background:#D1D1D1"></span><span class="token-meta">color/gray/200</span>
+      </td>
+      <td></td>
+      <td></td>
+  </tr>
+
+
+<tr>
+  <!-- COLOR UI 1.0 -->
+  <td>
+    <div class="cell-entry">
+    <span class="color-swatch" style="background:#C4CAD0"></span><span class="token-meta">General/Gray/500</span>
+  </div>
+
+  </td>
+  <!-- COLOR UI 2.0 -->
+  <td>
+    <span class="color-swatch" style="background:#B0B0B0"></span><span class="token-meta">color/gray/300</span>
+  </td>
+  <td></td>
+  <td></td>
+</tr>
+
+<tr>
+  <!-- COLOR UI 1.0 -->
+  <td>
+    <div class="cell-entry">
+    <span class="color-swatch" style="background:#21252973"></span><span class="token-meta">General/Global/Black-45-Opacity</span>
+  </div>
+
+  </td>
+  <!-- COLOR UI 2.0 -->
+  <td>
+    <span class="color-swatch" style="background:#888888"></span><span class="token-meta">color/gray/400</span>
+  </td>
+  <td></td>
+  <td></td>
+</tr>
+
+
+<tr>
+  <!-- COLOR UI 1.0 -->
+  <td>
+    <div class="cell-entry">
+    <span class="color-swatch" style="background:#78818A"></span><span class="token-meta">General/Gray/700</span>
+  </div>
+
+  </td>
+  <!-- COLOR UI 2.0 -->
+  <td>
+    <span class="color-swatch" style="background:#6D6D6D"></span><span class="token-meta">color/gray/500</span>
+  </td>
+  <td></td>
+  <td></td>
+</tr>
+
+<tr>
+  <!-- COLOR UI 1.0 -->
+  <td>
+    <div class="cell-entry">
+    <span class="color-swatch" style="background:#495057"></span><span class="token-meta">General/Gray/900</span>
+  </div>
+
+  </td>
+  <!-- COLOR UI 2.0 -->
+  <td>
+    <span class="color-swatch" style="background:#181818"></span><span class="token-meta">color/gray/950</span>
+  </td>
+  <td></td>
+  <td></td>
+</tr>
+
+<tr>
+  <!-- COLOR UI 1.0 -->
+  <td>
+    <div class="cell-entry">
+    <span class="color-swatch" style="background:#F2F7FD"></span><span class="token-meta">General/Informative/200</span>
+  </div>
+  <div class="cell-entry">
+    <span class="color-swatch" style="background:#E6F1FD"></span><span class="token-meta">General/Informative/300</span>
+  </div>
+  <div class="cell-entry">
+    <span class="color-swatch" style="background:#B3D6F9"></span><span class="token-meta">General/Informative/400</span>
+  </div>
+
+  </td>
+  <!-- COLOR UI 2.0 -->
+  <td>
+    <span class="color-swatch" style="background:#E9F4FF"></span><span class="token-meta">color/semantic/informative/light</span>
+  </td>
+  <td></td>
+  <td></td>
+</tr>
+
+<tr>
+  <!-- COLOR UI 1.0 -->
+  <td>
+    <div class="cell-entry">
+    <span class="color-swatch" style="background:#0172E4"></span><span class="token-meta">General/Informative/800-Primary</span>
+  </div>
+
+
+  </td>
+  <!-- COLOR UI 2.0 -->
+  <td>
+    <span class="color-swatch" style="background:#068BEE"></span><span class="token-meta">color/semantic/informative/default</span>
+  </td>
+  <td></td>
+  <td></td>
+</tr>
+
+<tr>
+  <!-- COLOR UI 1.0 -->
+  <td>
+    <div class="cell-entry">
+    <span class="color-swatch" style="background:#FCF3F3"></span><span class="token-meta">General/Danger/200</span>
+  </div>
+  <div class="cell-entry">
+    <span class="color-swatch" style="background:#FAE8E9"></span><span class="token-meta">General/Danger/300</span>
+  </div>
+  <div class="cell-entry">
+    <span class="color-swatch" style="background:#F9B3B7"></span><span class="token-meta">General/Danger/400</span>
+  </div>
+
+  </td>
+  <!-- COLOR UI 2.0 -->
+  <td>
+    <span class="color-swatch" style="background:#FFE8EA"></span><span class="token-meta">color/semantic/error/light</span>
+  </td>
+  <td></td>
+  <td></td>
+</tr>
+
+<tr>
+  <!-- COLOR UI 1.0 -->
+  <td>
+    <div class="cell-entry">
+    <span class="color-swatch" style="background:#C81720"></span><span class="token-meta">General/Danger/800-Primary</span>
+  </div>
+
+
+  </td>
+  <!-- COLOR UI 2.0 -->
+  <td>
+    <span class="color-swatch" style="background:#F83446"></span><span class="token-meta">color/semantic/error/default</span>
+  </td>
+  <td></td>
+  <td></td>
+</tr>
+
+<tr>
+  <!-- COLOR UI 1.0 -->
+  <td>
+    <div class="cell-entry">
+    <span class="color-swatch" style="background:#AE171E"></span><span class="token-meta">General/Danger/900-Hover</span>
+  </div>
+
+
+  </td>
+  <!-- COLOR UI 2.0 -->
+  <td>
+    <span class="color-swatch" style="background:#D8001B"></span><span class="token-meta">color/semantic/error/dark</span>
+  </td>
+  <td></td>
+  <td></td>
+</tr>
+
+<tr>
+  <!-- COLOR UI 1.0 -->
+  <td>
+    <div class="cell-entry">
+    <span class="color-swatch" style="background:#FDF9F4"></span><span class="token-meta">General/Warning/200</span>
+  </div>
+  <div class="cell-entry">
+    <span class="color-swatch" style="background:#FCF3E9"></span><span class="token-meta">General/Warning/300</span>
+  </div>
+  <div class="cell-entry">
+    <span class="color-swatch" style="background:#F9D8B3"></span><span class="token-meta">General/Warning/400</span>
+  </div>
+
+  </td>
+  <!-- COLOR UI 2.0 -->
+  <td>
+    <span class="color-swatch" style="background:#FFF4CF"></span><span class="token-meta">color/semantic/warning/light</span>
+  </td>
+  <td></td>
+  <td></td>
+</tr>
+
+<tr>
+  <!-- COLOR UI 1.0 -->
+  <td>
+    <div class="cell-entry">
+    <span class="color-swatch" style="background:#DF8620"></span><span class="token-meta">General/Warning/800-Primary</span>
+  </div>
+
+
+  </td>
+  <!-- COLOR UI 2.0 -->
+  <td>
+    <span class="color-swatch" style="background:#F6BC2F"></span><span class="token-meta">color/semantic/warning/default</span>
+  </td>
+  <td></td>
+  <td></td>
+</tr>
+
+<tr>
+  <!-- COLOR UI 1.0 -->
+  <td>
+    <div class="cell-entry">
+    <span class="color-swatch" style="background:#F3F9F5"></span><span class="token-meta">General/Success/200</span>
+  </div>
+  <div class="cell-entry">
+    <span class="color-swatch" style="background:#E9F4ED"></span><span class="token-meta">General/Success/300</span>
+  </div>
+  <div class="cell-entry">
+    <span class="color-swatch" style="background:#B3F9CA"></span><span class="token-meta">General/Success/400</span>
+  </div>
+
+  </td>
+  <!-- COLOR UI 2.0 -->
+  <td>
+    <span class="color-swatch" style="background:#E5FCE7"></span><span class="token-meta">color/semantic/success/light</span>
+  </td>
+  <td></td>
+  <td></td>
+</tr>
+
+<tr>
+  <!-- COLOR UI 1.0 -->
+  <td>
+    <div class="cell-entry">
+    <span class="color-swatch" style="background:#1A883F"></span><span class="token-meta">General/Success/800-Primary</span>
+  </div>
+
+
+  </td>
+  <!-- COLOR UI 2.0 -->
+  <td>
+    <span class="color-swatch" style="background:#06C167"></span><span class="token-meta">color/semantic/success/default</span>
+  </td>
+  <td></td>
+  <td></td>
+</tr>
+
+<tr>
+  <!-- COLOR UI 1.0 -->
+  <td>
+    <div class="cell-entry">
+    <span class="color-swatch" style="background:#0C652A"></span><span class="token-meta">General/Success/900-Hover</span>
+  </div>
+
+
+  </td>
+  <!-- COLOR UI 2.0 -->
+  <td>
+    <span class="color-swatch" style="background:#107D32"></span><span class="token-meta">color/semantic/success/dark</span>
+  </td>
+  <td></td>
+  <td></td>
+</tr>
+          
+
+        <tr style="background-color:#F6F6F6">
+          <td>
+            Tokens
+          </td>
+          <td>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <!-- COLOR UI 1.0 -->
+          <td>
+            <div class="cell-entry">
+            <span class="color-swatch" style="background:#ECEFF2"></span><span class="token-meta">Components/Border-Light</span>
+          </div>
+          <div class="cell-entry">
+            <span class="color-swatch" style="background:#ECEFF2"></span><span class="token-meta">Components/Divisor-Light</span>
+          </div>
+          </td>
+          <!-- COLOR UI 2.0 -->
+          <td>
+            <span class="color-swatch" style="background:#F6F6F6"></span><span class="token-meta">color/gray/50 -> border/color/primary-light</span>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <!-- COLOR UI 1.0 -->
+          <td>
+            <div class="cell-entry">
+            <span class="color-swatch" style="background:#DEE2E6"></span><span class="token-meta">Components/Border-Medium</span>
+          </div>
+          <div class="cell-entry">
+            <span class="color-swatch" style="background:#DEE2E6"></span><span class="token-meta">Components/Divider-Medium</span>
+          </div>
+          </td>
+          <!-- COLOR UI 2.0 -->
+          <td>
+            <span class="color-swatch" style="background:#E7E7E7"></span><span class="token-meta">color/gray/100 -> border/color/primary</span>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
       </tbody>
     </table>
   </body>
