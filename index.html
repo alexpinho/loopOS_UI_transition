@@ -102,6 +102,16 @@
         display: inline-flex;
       }
 
+      .section-link:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+
+      .section-link:focus:not(:focus-visible) {
+        outline: none;
+      }
+
       .section-link .material-symbols-outlined {
         font-size: 16px;
       }
@@ -270,6 +280,16 @@
         font-weight: 500;
       }
 
+      .tab-button:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+
+      .tab-button:focus:not(:focus-visible) {
+        outline: none;
+      }
+
       .tab-content {
         display: none;
       }
@@ -294,13 +314,99 @@
         cursor: pointer;
       }
 
+      .filter-toggle input[type="checkbox"]:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+        border-radius: 2px;
+      }
+
+      .filter-toggle input[type="checkbox"]:focus:not(:focus-visible) {
+        outline: none;
+      }
+
       .filter-toggle label {
         cursor: pointer;
         user-select: none;
       }
 
+      .filter-toggle label:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+
+      .filter-toggle label:focus:not(:focus-visible) {
+        outline: none;
+      }
+
       .hidden {
         display: none;
+      }
+
+      /* Focus styles for accessibility - keyboard only */
+      a:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+        border-radius: 2px;
+      }
+
+      a:focus:not(:focus-visible) {
+        outline: none;
+      }
+
+      button:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+
+      button:focus:not(:focus-visible) {
+        outline: none;
+      }
+
+      input:focus-visible,
+      select:focus-visible,
+      textarea:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+        border-radius: 2px;
+      }
+
+      input:focus:not(:focus-visible),
+      select:focus:not(:focus-visible),
+      textarea:focus:not(:focus-visible) {
+        outline: none;
+      }
+
+      /* Navigation button */
+      .nav-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        margin-bottom: 2rem;
+        background: var(--color-primary);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 6px;
+        font-family: var(--font-body);
+        font-size: 14px;
+        font-weight: 500;
+        transition: background 0.2s ease;
+      }
+
+      .nav-button:hover {
+        background: #1a2e33;
+      }
+
+      .nav-button:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+        background: #1a2e33;
+      }
+
+      .nav-button:focus:not(:focus-visible) {
+        outline: none;
       }
     </style>
   </head>
@@ -308,8 +414,9 @@
     <img
       src="/LoopOS_Logo_RGB_Dark.png"
       alt="Logo"
-      style="display: block; height: 40px"
+      style="display: block; height: 40px; margin-bottom: 1rem;"
     />
+    <a href="/next-gen-ui.html" class="nav-button">Next gen UI</a>
     <h1>LoopOS UI Foundations Transition</h1>
     <div class="section-description">
       <p>This page serves as a visual reference for transitioning our design tokens and styles from UI 1.0 to UI 2.0. The goal is to help you understand exactly how each token is migrating so that we can align design and code seamlessly and reduce conflicts during the rollout of the new UI.
