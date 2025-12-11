@@ -277,6 +277,31 @@
       .tab-content.active {
         display: block;
       }
+
+      /* Filter toggle */
+      .filter-toggle {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 1rem;
+        font-family: var(--font-body);
+        font-size: 14px;
+      }
+
+      .filter-toggle input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+      }
+
+      .filter-toggle label {
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .hidden {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -306,6 +331,10 @@
     <!-- Icons Tab Content -->
     <div class="tab-content active" id="icons-tab">
       <h2 id="icons">Icons <a class="section-link" target="_blank" href="https://www.figma.com/design/eon8NkZzqxEAgTllaZPRkz/%F0%9F%A7%A9-LoopOS-UI-2.0?node-id=13-41&m=dev" aria-label="Link to Icons"><span class="material-symbols-outlined">open_in_new</span></a><span class="badge info">In Progress</span><span class="badge counter" id="icons-rows-count"></span></h2>
+      <div class="filter-toggle">
+        <input type="checkbox" id="svg-filter" />
+        <label for="svg-filter">Show only SVG icons</label>
+      </div>
     <table>
       <thead>
         <tr><th>UI 1.0 (Font Awesome)</th><th>UI 2.0 (Material Symbols)</th><th>Keys</th><th>Usage</th><th>Notes</th></tr>
@@ -368,10 +397,24 @@
           <td></td>
         </tr>
         <tr>
+          <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
+          <td><span class="material-symbols-rounded">box_add</span><span class="token-meta"><code>box</code></span></td>
+          <td>product_add</td>
+          <td>Open catalog: Add Product</td>
+          <td></td>
+        </tr>
+        <tr>
           <td><i class="fa-regular fa-seal"></i> <span class="token-meta"><code>fa-regular fa-seal</code></span></td>
-          <td><img src="/assets/fontawesome/m_icons/verified.svg" alt="verified" style="width: 20px; height: 20px;" /><span class="token-meta"><code>verified</code></span></td>
+          <td><img src="/assets/fontawesome/m_icons/verified.svg" alt="verified" style="width: 20px; height: 20px;" /><span class="token-meta"><code>svg</code></span></td>
           <td>brand</td>
           <td>Brands</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
+          <td><img src="/assets/fontawesome/m_icons/verified_add.svg" alt="verified" style="width: 20px; height: 20px;" /><span class="token-meta"><code>svg</code></span></td>
+          <td>brand_add</td>
+          <td>Open Catalog: Add Brand</td>
           <td></td>
         </tr>
         <tr>
@@ -497,14 +540,14 @@
         <tr>
           <td><i class="fa-regular fa-hand-holding-dollar"></i> <span class="token-meta"><code>fa-regular fa-hand-holding-dollar</code></span></td>
           <td><span class="material-symbols-rounded">automation</span><span class="token-meta"><code>automation</code></span></td>
-          <td>automation</td>
+          <td>auto_validation</td>
           <td>Service: Auto Validation</td>
           <td></td>
         </tr>
         <tr>
           <td><i class="fa-regular fa-door-closed"></i> <span class="token-meta"><code>fa-regular fa-door-closed</code></span></td>
           <td><span class="material-symbols-rounded">door_front</span><span class="token-meta"><code>door_front</code></span></td>
-          <td>doorfront</td>
+          <td>end</td>
           <td>Service: End</td>
           <td></td>
         </tr>
@@ -518,7 +561,7 @@
         <tr>
           <td><i class="fa-regular fa-credit-card"></i> <span class="token-meta"><code>fa-regular fa-credit-card</code></span></td>
           <td>
-            <img src="/assets/fontawesome/m_icons/payment_arrow_up.svg" alt="loopos_core" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 0.5rem;" /><span class="token-meta"><code>payment_arrow_up</code></span>
+            <img src="/assets/fontawesome/m_icons/payment_arrow_up.svg" alt="loopos_core" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 0.5rem;" /><span class="token-meta"><code>svg</code></span>
           <td>outgoing_payment</td>
           <td>Service: Outgoing payment (in review, needs approval)</td>
           <td></td>
@@ -540,7 +583,7 @@
         <tr>
           <td><i class="fa-regular fa-paintbrush-pencil"></i> <span class="token-meta"><code>fa-regular fa-paintbrush-pencil</code></span></td>
           <td><span class="material-symbols-rounded">design_services</span><span class="token-meta"><code>design_services</code></span></td>
-          <td>designservices</td>
+          <td>design_services</td>
           <td>Input element Custom</td>
           <td></td>
         </tr>
@@ -554,14 +597,14 @@
         <tr>
           <td><i class="fa-regular fa-calendar-range"></i> <span class="token-meta"><code>fa-regular fa-calendar-range</code></span></td>
           <td><span class="material-symbols-rounded">date_range</span><span class="token-meta"><code>date_range</code></span></td>
-          <td>daterange</td>
+          <td>date_range</td>
           <td>Input element date range / Date range </td>
           <td></td>
         </tr>
         <tr>
           <td><i class="fa-regular fa-image"></i> <span class="token-meta"><code>fa-regular fa-image</code></span></td>
           <td><span class="material-symbols-rounded">art_track</span><span class="token-meta"><code>art_track</code></span></td>
-          <td>arttrack</td>
+          <td>multiple_images</td>
           <td>Input element images </td>
           <td></td>
         </tr>
@@ -666,7 +709,7 @@
         <tr>
           <td><i class="fa-regular fa-text"></i> <span class="token-meta"><code>fa-regular fa-text</code></span></td>
           <td><span class="material-symbols-rounded">text_fields</span><span class="token-meta"><code>text_fields</code></span></td>
-          <td>textfields</td>
+          <td>text_fields</td>
           <td>Info element text </td>
           <td></td>
         </tr>
@@ -909,10 +952,80 @@
           <td></td>
         </tr>
         <tr>
+          <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
+          <td><span class="material-symbols-rounded">expand_content</span><span class="token-meta"><code>expand_content</code></span></td>
+          <td>expand_content</td>
+          <td>Expand content</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
+          <td><span class="material-symbols-rounded">qr_code_scanner</span><span class="token-meta"><code>qr_code_scanner</code></span></td>
+          <td>qr_code_scanner</td>
+          <td>QR Code scanner</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
+          <td><span class="material-symbols-rounded">cached</span><span class="token-meta"><code>cached</code></span></td>
+          <td>refresh</td>
+          <td>Refresh</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
+          <td><span class="material-symbols-rounded">swap_vert</span><span class="token-meta"><code>swap_vert</code></span></td>
+          <td>swap_vert</td>
+          <td>Swap</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
+          <td><span class="material-symbols-rounded">download</span><span class="token-meta"><code>download</code></span></td>
+          <td>download</td>
+          <td>Download</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
+          <td><span class="material-symbols-rounded">upload</span><span class="token-meta"><code>upload</code></span></td>
+          <td>upload</td>
+          <td>Upload</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
+          <td><span class="material-symbols-rounded">upload</span><span class="token-meta"><code>upload</code></span></td>
+          <td>upload</td>
+          <td>Upload</td>
+          <td></td>
+        </tr>
+        <tr>
           <td><i class="fa-regular fa-star"></i> <span class="token-meta"><code>fa-regular fa-star</code></span></td>
-          <td><span class="material-symbols-rounded">star</span><span class="token-meta"><code>star</code></span></td>
-          <td>favorite</td>
-          <td>Favorite</td>
+          <td><span class="material-symbols-rounded">attach_file</span><span class="token-meta"><code>attach_file</code></span></td>
+          <td>attach_file</td>
+          <td>Attach</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
+          <td><span class="material-symbols-rounded">cloud_upload</span><span class="token-meta"><code>cloud_upload</code></span></td>
+          <td>cloud_upload</td>
+          <td>Cloud upload</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
+          <td><span class="material-symbols-rounded">mode_off_on</span><span class="token-meta"><code>mode_off_on</code></span></td>
+          <td>mode_on</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
+          <td><img src="/assets/fontawesome/m_icons/mode_off.svg" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 0.5rem;" /><span class="token-meta"><code>svg</code></span></td>
+          <td>mode_off</td>
+          <td></td>
           <td></td>
         </tr>
         <tr>
@@ -952,14 +1065,14 @@
         </tr>
         <tr>
           <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
-          <td><img src="/assets/fontawesome/m_icons/loopos_core.svg" alt="loopos_core" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 0.5rem;" /><span class="token-meta"><code>loopos_core</code></span></td>
+          <td><img src="/assets/fontawesome/m_icons/loopos_core.svg" alt="loopos_core" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 0.5rem;" /><span class="token-meta"><code>svg</code></span></td>
           <td>core_app</td>
           <td>LoopOS Core</td>
           <td></td>
         </tr>
         <tr>
           <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
-          <td><img src="/assets/fontawesome/m_icons/loopos_impact.svg" alt="loopos_impact" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 0.5rem;" /><span class="token-meta"><code>loopos_impact</code></span></td>
+          <td><img src="/assets/fontawesome/m_icons/loopos_impact.svg" alt="loopos_impact" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 0.5rem;" /><span class="token-meta"><code>svg</code></span></td>
           <td>impact_app</td>
           <td>LoopOS Impact</td>
           <td></td>
@@ -974,21 +1087,21 @@
         <tr>
           <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
           <td><span class="material-symbols-rounded">data_object</span><span class="token-meta"><code>data_object</code></span></td>
-          <td>data_object</td>
+          <td>objects</td>
           <td>Liquid objects</td>
           <td></td>
         </tr>
         <tr>
           <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
           <td><span class="material-symbols-rounded">format_quote</span><span class="token-meta"><code>format_quote</code></span></td>
-          <td>format_quote</td>
+          <td>string</td>
           <td>Liquid string data type</td>
           <td></td>
         </tr>
         <tr>
           <td><i class="fa-regular fa-"></i> <span class="token-meta"><code>-</code></span></td>
           <td><span class="material-symbols-rounded">toggle_off</span><span class="token-meta"><code>toggle_off</code></span></td>
-          <td>toggle_off</td>
+          <td>boolean</td>
           <td>Liquid boolean data type</td>
           <td></td>
         </tr>
@@ -998,13 +1111,55 @@
     <script>
       window.addEventListener('DOMContentLoaded', function() {
         try {
-          var iconsTable = document.querySelector('#icons + table tbody');
+          var iconsTable = document.querySelector('#icons-tab table tbody');
           var countEl = document.getElementById('icons-rows-count');
           if (iconsTable && countEl) {
             var rows = iconsTable.querySelectorAll('tr');
             countEl.textContent = rows.length;
           }
         } catch (e) {}
+
+        // SVG filter functionality
+        function applySvgFilter() {
+          var svgFilter = document.getElementById('svg-filter');
+          var iconsTable = document.querySelector('#icons-tab table tbody');
+          
+          if (!svgFilter || !iconsTable) return;
+          
+          var rows = iconsTable.querySelectorAll('tr');
+          rows.forEach(function(row) {
+            var secondCol = row.querySelector('td:nth-child(2)');
+            if (!secondCol) return;
+            
+            // Check if second column has <img> tag
+            var hasImg = secondCol.querySelector('img');
+            
+            if (svgFilter.checked) {
+              // Show only SVG rows (rows with <img> tag)
+              if (hasImg) {
+                row.classList.remove('hidden');
+              } else {
+                row.classList.add('hidden');
+              }
+            } else {
+              // Show all rows
+              row.classList.remove('hidden');
+            }
+          });
+        }
+        
+        try {
+          var svgFilter = document.getElementById('svg-filter');
+          if (svgFilter) {
+            svgFilter.addEventListener('change', applySvgFilter);
+            // Apply filter on initial load if checked
+            if (svgFilter.checked) {
+              applySvgFilter();
+            }
+          }
+        } catch (e) {
+          console.error('SVG filter error:', e);
+        }
 
         try {
           function rgbToHex(rgb) {
@@ -2024,6 +2179,29 @@
             // Add active class to clicked button and corresponding content
             this.classList.add('active');
             document.getElementById(targetTab + '-tab').classList.add('active');
+            
+            // Apply SVG filter if icons tab is activated
+            if (targetTab === 'icons') {
+              setTimeout(function() {
+                var svgFilter = document.getElementById('svg-filter');
+                if (svgFilter && svgFilter.checked) {
+                  var iconsTable = document.querySelector('#icons-tab table tbody');
+                  if (iconsTable) {
+                    var rows = iconsTable.querySelectorAll('tr');
+                    rows.forEach(function(row) {
+                      var secondCol = row.querySelector('td:nth-child(2)');
+                      if (!secondCol) return;
+                      var hasImg = secondCol.querySelector('img');
+                      if (hasImg) {
+                        row.classList.remove('hidden');
+                      } else {
+                        row.classList.add('hidden');
+                      }
+                    });
+                  }
+                }
+              }, 10);
+            }
           });
         });
       });
